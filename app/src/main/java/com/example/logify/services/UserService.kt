@@ -1,0 +1,14 @@
+package com.example.logify.services
+
+import com.example.logify.data.User
+import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.POST
+
+interface UserService {
+    @POST("/login")
+    suspend fun login(@Body credentials: Map<String, String>): Response<User>
+
+    @POST("/register")
+    suspend fun register(@Body user: User): Response<User>
+}
