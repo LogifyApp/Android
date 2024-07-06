@@ -10,6 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,25 +36,30 @@ fun InitialScreen(navController: NavController) {
         Image(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "Logify Logo",
-            modifier = Modifier.size(128.dp)
+            modifier = Modifier.size(220.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Logify", fontSize = 24.sp, color = Color.Black)
-        Spacer(modifier = Modifier.height(32.dp))
+        Text(text = "Logify", fontSize = 48.sp, color = Color.Black,
+            style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquindark_regular, FontWeight.Normal))))
+        Spacer(modifier = Modifier.height(100.dp))
         Button(
             onClick = { navController.navigate("login") },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 20.dp), contentPadding = PaddingValues(vertical = 0.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
         ) {
-            Text(text = "Log in")
+            Text(text = "Log in", fontSize = 20.sp,
+                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium))))
         }
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = { navController.navigate("register") },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 20.dp), contentPadding = PaddingValues(vertical = 0.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
         ) {
-            Text(text = "Register")
+            Text(text = "Register", fontSize = 20.sp,
+                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium))))
         }
     }
 }
