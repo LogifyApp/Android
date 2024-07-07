@@ -16,14 +16,15 @@ class UserViewModel @Inject constructor(private val userRepository: UserReposito
     private val _user = MutableStateFlow<User?>(null)
     val user: StateFlow<User?> get() = _user
 
-    fun login(phoneNumber: String, password: String) {
+    fun login(phoneNumber: String, password: String): User? {
         viewModelScope.launch {
             val result = userRepository.login(phoneNumber, password)
             _user.value = result
         }
+        return _user.value
     }
 
-    fun register(userDto: UserDto) : User?{
+    fun register(userDto: UserDto): User?{
         viewModelScope.launch {
             val result = userRepository.register(userDto)
             if (result != null) {

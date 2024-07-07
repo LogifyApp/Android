@@ -2,6 +2,7 @@ package com.example.logify.repository
 
 import com.example.logify.dao.UserDao
 import com.example.logify.data.User
+import com.example.logify.dto.LoginRequestDto
 import com.example.logify.dto.UserDto
 import com.example.logify.services.UserService
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,7 @@ class UserRepository @Inject constructor(private val userService: UserService, p
 
     suspend fun login(phoneNumber: String, password: String): User? {
         return withContext(Dispatchers.IO) {
-            val response = userService.login(phoneNumber, password)
+            val response = userService.login(loginRequestDto = LoginRequestDto(phoneNumber, password))
             if (response.isSuccessful) {
                 response.body()?.let {
                     return@let it

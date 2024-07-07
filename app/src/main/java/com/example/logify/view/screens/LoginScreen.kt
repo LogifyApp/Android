@@ -14,11 +14,15 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -43,6 +47,7 @@ import com.example.logify.R
 import com.example.logify.view.components.CustomPasswordTextField
 import com.example.logify.view.components.CustomTextField
 import com.example.logify.viewmodel.UserViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -52,6 +57,13 @@ fun LoginScreen(navController: NavController, viewModel: UserViewModel = viewMod
 
     val (focusRequesterPhone, focusRequesterPassword) = FocusRequester.createRefs()
     val focusManager = LocalFocusManager.current
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { paddingValues ->
 
     Image(
         painter = painterResource(id = R.drawable.complex_background),
@@ -63,6 +75,7 @@ fun LoginScreen(navController: NavController, viewModel: UserViewModel = viewMod
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(paddingValues)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -96,7 +109,22 @@ fun LoginScreen(navController: NavController, viewModel: UserViewModel = viewMod
         )
         Spacer(modifier = Modifier.height(32.dp))
         Button(
-            onClick = {},
+            onClick = {
+                try {
+                    val userResponse = viewModel.login(phoneNumber, password)
+                    if (userResponse != null) {
+                        viewModel.insertUser(userResponse)
+                    } else {
+                        scope.launch {
+                            snackbarHostState.showSnackbar("Something went wrong")
+                        }
+                    }
+                } catch (e: Exception) {
+                    scope.launch {
+                        snackbarHostState.showSnackbar("Error: ${e.message}")
+                    }
+                }
+            },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
             modifier = Modifier
                 .fillMaxWidth()
@@ -114,6 +142,7 @@ fun LoginScreen(navController: NavController, viewModel: UserViewModel = viewMod
                     )
                 )
             )
+        }
         }
     }
 }
