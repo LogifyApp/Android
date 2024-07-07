@@ -1,6 +1,7 @@
 package com.example.logify.view.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -23,9 +24,11 @@ import com.example.logify.R
 
 @Composable
 fun InitialScreen(navController: NavController) {
-    Image(painter = painterResource(id = R.drawable.complex_background),
+    Image(
+        painter = painterResource(id = R.drawable.complex_background),
         contentDescription = null, contentScale = ContentScale.Crop,
-        modifier = Modifier.fillMaxSize())
+        modifier = Modifier.fillMaxSize()
+    )
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -39,8 +42,17 @@ fun InitialScreen(navController: NavController) {
             modifier = Modifier.size(220.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Logify", fontSize = 48.sp, color = Color.Black,
-            style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquindark_regular, FontWeight.Normal))))
+        Text(
+            text = "Logify", fontSize = 48.sp, color = Color.Black,
+            style = TextStyle(
+                fontFamily = FontFamily(
+                    Font(
+                        R.font.palanquindark_regular,
+                        FontWeight.Normal
+                    )
+                )
+            )
+        )
         Spacer(modifier = Modifier.height(100.dp))
         Button(
             onClick = { navController.navigate("login") },
@@ -48,8 +60,10 @@ fun InitialScreen(navController: NavController) {
                 .padding(horizontal = 20.dp), contentPadding = PaddingValues(vertical = 0.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
         ) {
-            Text(text = "Log in", fontSize = 20.sp,
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium))))
+            Text(
+                text = "Log in", fontSize = 20.sp,
+                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium)))
+            )
         }
         Spacer(modifier = Modifier.height(16.dp))
         Button(
@@ -58,8 +72,10 @@ fun InitialScreen(navController: NavController) {
                 .padding(horizontal = 20.dp), contentPadding = PaddingValues(vertical = 0.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
         ) {
-            Text(text = "Register", fontSize = 20.sp,
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium))))
+            Text(
+                text = "Register", fontSize = 20.sp,
+                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium)))
+            )
         }
     }
 }
