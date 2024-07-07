@@ -4,9 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,18 +17,19 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
@@ -43,7 +42,6 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,7 +50,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.logify.R
-import com.example.logify.data.User
 import com.example.logify.dto.UserDto
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.DarkBlue
@@ -60,11 +57,11 @@ import com.example.logify.ui.theme.LightBlue
 import com.example.logify.view.components.CustomPasswordTextField
 import com.example.logify.view.components.CustomTextField
 import com.example.logify.viewmodel.UserViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun RegisterScreen(navController: NavController) {
-//fun RegisterScreen(navController: NavController, viewModel: UserViewModel = viewModel()) {
+fun RegisterScreen(navController: NavController, viewModel: UserViewModel = viewModel()) {
     var name by remember { mutableStateOf("") }
     var surname by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
@@ -74,6 +71,12 @@ fun RegisterScreen(navController: NavController) {
     val (focusRequesterName, focusRequesterSurname, focusRequesterPhone, focusRequesterPassword) = FocusRequester.createRefs()
     val focusManager = LocalFocusManager.current
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { paddingValues ->
 
     Image(
         painter = painterResource(id = R.drawable.complex_background),
@@ -81,10 +84,10 @@ fun RegisterScreen(navController: NavController) {
         contentScale = ContentScale.Crop,
         modifier = Modifier.fillMaxSize()
     )
-
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(paddingValues)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -124,8 +127,10 @@ fun RegisterScreen(navController: NavController) {
                     },
                 border = if (role == "Driver") null else BorderStroke(5.dp, BackgroundLightBlue)
             ) {
-                Text(text = "Driver", fontSize = 18.sp,
-                    style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium))))
+                Text(
+                    text = "Driver", fontSize = 18.sp,
+                    style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium)))
+                )
             }
             Button(
                 onClick = { role = "Employer" },
@@ -141,15 +146,17 @@ fun RegisterScreen(navController: NavController) {
                     },
                 border = if (role == "Employer") null else BorderStroke(3.dp, BackgroundLightBlue)
             ) {
-                Text(text = "Employer", fontSize = 18.sp,
-                    style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium))))
+                Text(
+                    text = "Employer", fontSize = 18.sp,
+                    style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium)))
+                )
             }
         }
         Spacer(modifier = Modifier.height(38.dp))
         CustomTextField(
             value = name,
             onValueChange = { name = it },
-            label = "Name" ,
+            label = "Name",
             focusRequester = focusRequesterName,
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
             keyboardActions = KeyboardActions(onNext = { focusRequesterSurname.requestFocus() })
@@ -191,7 +198,20 @@ fun RegisterScreen(navController: NavController) {
                     password = password,
                     role = role
                 )
-//                    viewModel.register(newUser)
+                try {
+                    val userResponse = viewModel.register(newUser)
+                    if (userResponse != null) {
+                        viewModel.insertUser(userResponse)
+                    } else {
+                        scope.launch {
+                            snackbarHostState.showSnackbar("Something went wrong")
+                        }
+                    }
+                } catch (e: Exception) {
+                    scope.launch {
+                        snackbarHostState.showSnackbar("Error: ${e.message}")
+                    }
+                }
             },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
             modifier = Modifier
@@ -201,9 +221,17 @@ fun RegisterScreen(navController: NavController) {
             Text(
                 text = "Register",
                 fontSize = 20.sp,
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium, FontWeight.Medium)))
+                style = TextStyle(
+                    fontFamily = FontFamily(
+                        Font(
+                            R.font.palanquin_medium,
+                            FontWeight.Medium
+                        )
+                    )
+                )
             )
         }
+    }
     }
 }
 
@@ -211,6 +239,5 @@ fun RegisterScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun RegisterScreenPreview() {
-    RegisterScreen(navController = rememberNavController())
-//    RegisterScreen(navController = rememberNavController(), viewModel = viewModel())
+    RegisterScreen(navController = rememberNavController(), viewModel = viewModel())
 }

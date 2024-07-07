@@ -1,14 +1,18 @@
 package com.example.logify.repository
 
+import com.example.logify.dao.UserDao
+import com.example.logify.data.User
 import com.example.logify.dto.UserDto
 import com.example.logify.services.UserService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class UserRepository(private val userService: UserService) {
+@Singleton
+class UserRepository @Inject constructor(private val userService: UserService, private val userDao: UserDao) {
 
-//     Simulated network call to login
-    suspend fun login(phoneNumber: String, password: String): UserDto? {
+    suspend fun login(phoneNumber: String, password: String): User? {
         return withContext(Dispatchers.IO) {
             val response = userService.login(phoneNumber, password)
             if (response.isSuccessful) {
@@ -20,16 +24,23 @@ class UserRepository(private val userService: UserService) {
         }
     }
 
-//     Simulated network call to register
-    suspend fun register(userDto: UserDto): Boolean {
+    suspend fun register(userDto: UserDto): User? {
         return withContext(Dispatchers.IO) {
             val response = userService.register(userDto)
             if (response.isSuccessful) {
                 response.body()?.let {
-                    return@withContext true
+                    return@let it
                 }
             }
-            return@withContext false
+            return@withContext null
         }
+    }
+
+    fun insertUser(user: User) {
+        userDao.insertUser(user)
+    }
+
+    fun getUser(): User? {
+        return userDao.getUser()
     }
 }
