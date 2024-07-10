@@ -12,7 +12,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.logify.data.Cargo
 import com.example.logify.ui.theme.LogifyTheme
+import com.example.logify.view.screens.CargoScreen
 import com.example.logify.view.screens.InitialScreen
 import com.example.logify.view.screens.LoginScreen
 import com.example.logify.view.screens.RegisterScreen
@@ -45,10 +47,21 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AppContent(navController: NavHostController, viewModel: UserViewModel) {
-        NavHost(navController = navController, startDestination = "initial") {
+        NavHost(navController = navController, startDestination = "cargo") {
             composable("initial") { InitialScreen(navController) }
             composable("login") { LoginScreen(navController, viewModel) }
             composable("register") { RegisterScreen(navController, viewModel) }
+            composable("cargo") { CargoScreen(cargoItems = getCargoItems()) }
         }
+    }
+
+    private fun getCargoItems(): List<Cargo> {
+        return listOf(
+            Cargo(id = 31023, status = "Created", creationDate = "4.05.2024", carId = 1, driverId = 1),
+            Cargo(id = 31024, status = "Started", creationDate = "4.05.2024", carId = 1, driverId = 1),
+            Cargo(id = 31023, status = "In-check", creationDate = "4.05.2024", carId = 1, driverId = 1),
+            Cargo(id = 31023, status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
+            Cargo(id = 31023, status = "Problem", creationDate = "4.05.2024", carId = 1, driverId = 1)
+        )
     }
 }
