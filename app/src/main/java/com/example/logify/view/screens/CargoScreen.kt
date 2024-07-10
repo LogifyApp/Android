@@ -121,7 +121,7 @@ fun CargoScreen(cargoItems: List<Cargo>) {
                 .background(BackgroundLightBlue)
                 .padding(innerPadding)
         ) {
-            CargoList(cargoItems = cargoItems)
+            CargoList(cargoItems = filteredItems)
         }
     }
 }
