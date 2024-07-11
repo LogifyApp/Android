@@ -161,11 +161,7 @@ fun CargoScreen(cargoItems: List<Cargo>) {
                         )
                         Spacer(modifier = Modifier.weight(0.5f))
                     }
-                },
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(BackgroundLightBlue)
-                    .imePadding()
+                }
             ) { innerPadding ->
                 Box(
                     modifier = Modifier

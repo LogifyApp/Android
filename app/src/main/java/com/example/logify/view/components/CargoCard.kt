@@ -40,7 +40,7 @@ fun CargoItemCard(cargoItem: Cargo) {
         "In-check" -> OrangeStatus
         "Finished" -> LightGreenStatus
         "Problem" -> RedStatus
-        else -> BackgroundLightBlue
+        else -> Color.Transparent
     }
 
     Row(
