@@ -1,10 +1,9 @@
-package com.example.logify.view.screens
+package com.example.logify.view.screens.driver
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,45 +22,48 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.logify.R
-import com.example.logify.data.Cargo
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.DarkBlue
 import com.example.logify.view.components.CargoList
 import com.example.logify.view.components.CustomSearchField
+import com.example.logify.viewmodel.CargoViewModel
 import com.google.accompanist.insets.ProvideWindowInsets
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CargoScreen(cargoItems: List<Cargo>) {
+fun CargoScreen(cargoViewModel: CargoViewModel, employerId: Int) {
+    val cargos by cargoViewModel.cargos.observeAsState(emptyList())
     var search by remember { mutableStateOf("") }
-    var filteredItems by remember { mutableStateOf(cargoItems) }
+    var filteredItems by remember { mutableStateOf(cargos) }
 
     LaunchedEffect(search) {
         filteredItems = if (search.isEmpty()) {
-            cargoItems
+            cargos
         } else {
-            cargoItems.filter {
+            cargos.filter {
                 it.id.toString().contains(search) || it.status.contains(
                     search,
                     ignoreCase = true
                 )
             }
         }
+    }
+
+    LaunchedEffect(Unit) {
+        cargoViewModel.loadCargos(employerId)
     }
 
     ProvideWindowInsets {
@@ -161,7 +163,11 @@ fun CargoScreen(cargoItems: List<Cargo>) {
                         )
                         Spacer(modifier = Modifier.weight(0.5f))
                     }
-                }
+                },
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(BackgroundLightBlue)
+                    .imePadding()
             ) { innerPadding ->
                 Box(
                     modifier = Modifier
@@ -174,24 +180,4 @@ fun CargoScreen(cargoItems: List<Cargo>) {
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MainPagePreview() {
-    val cargoItems = listOf(
-        Cargo(id = 31023, status = "Created", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31024, status = "Started", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "In-check", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
-        Cargo(id = 31023,  status = "Problem", creationDate = "4.05.2024", carId = 1, driverId = 1)
-    )
-    CargoScreen(cargoItems = cargoItems)
 }
