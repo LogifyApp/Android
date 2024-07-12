@@ -4,12 +4,16 @@ import android.content.Context
 import androidx.room.Room
 import com.example.logify.dao.AppDatabase
 import com.example.logify.dao.CargoDao
+import com.example.logify.dao.ChatLastOpenedDao
 import com.example.logify.dao.TokenDao
 import com.example.logify.dao.UserDao
 import com.example.logify.repository.CargoRepository
+import com.example.logify.repository.MessageRepository
 import com.example.logify.repository.TokenRepository
 import com.example.logify.repository.UserRepository
+import com.example.logify.services.ApiMessageService
 import com.example.logify.services.CargoService
+import com.example.logify.services.MessageService
 import com.example.logify.services.TokenService
 import com.example.logify.services.UserService
 import dagger.Module
@@ -63,6 +67,17 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideApiMessageService(): ApiMessageService {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(OkHttpClient.Builder().build())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(ApiMessageService::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(
             context.applicationContext,
@@ -105,5 +120,25 @@ object AppModule {
     @Singleton
     fun provideCargoRepository(cargoService: CargoService, cargoDao: CargoDao): CargoRepository {
         return CargoRepository(cargoService, cargoDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMessageRepository(
+        apiMessageService: ApiMessageService,
+        chatLastOpenedDao: ChatLastOpenedDao
+    ): MessageRepository {
+        return MessageRepository(apiMessageService, chatLastOpenedDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMessageService(repository: MessageRepository): MessageService {
+        return MessageService(repository)
+    }
+    @Provides
+    @Singleton
+    fun provideChatLastOpenedDao(database: AppDatabase): ChatLastOpenedDao {
+        return database.chatLastOpenedDao()
     }
 }

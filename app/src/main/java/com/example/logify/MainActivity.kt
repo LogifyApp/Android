@@ -24,6 +24,7 @@ import com.example.logify.viewmodel.TokenViewModel
 import com.example.logify.viewmodel.UserViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDateTime
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -54,11 +55,11 @@ class MainActivity : ComponentActivity() {
             composable("initial") { InitialScreen(navController) }
             composable("login") { LoginScreen(navController, userViewModel) }
             composable("register") { RegisterScreen(navController, userViewModel) }
-            composable("cargo") { CargoScreen(cargoViewModel, employerId = 1) }
+            composable("cargo") { CargoScreen(cargoViewModel, employerId = 1, chatId = 1, lastChatOpenDateTime = LocalDateTime.now()) }
             composable("detailed_cargo_screen/{cargoId}") { backStackEntry ->
                 val cargoId = backStackEntry.arguments?.getString("cargoId")?.toIntOrNull()
                 cargoId?.let {
-                    DetailedCargoScreen(cargoId = it, cargoViewModel = cargoViewModel)
+                    DetailedCargoScreen(cargoId = it, cargoViewModel = cargoViewModel, chatId = 1)
                 }
             }
         }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -34,16 +35,23 @@ import com.example.logify.ui.theme.OrangeStatus
 import com.example.logify.ui.theme.RedStatus
 import com.example.logify.view.components.DetailedCargoRow
 import com.example.logify.view.components.DetailedPointRow
+import com.example.logify.view.components.DriverBottomAppBarWithBadge
 import com.example.logify.viewmodel.CargoViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel()) {
+fun DetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel(), chatId: Int) {
     val cargo by cargoViewModel.selectedCargo.observeAsState()
     //TODO val points by pointViewModel.points.observeAsState(emptyList())
 
+    val unreadMessageCount by cargoViewModel.unreadMessageCount.collectAsState(0)
+
     LaunchedEffect(Unit) {
         cargo?.let { cargoViewModel.loadCargosByDriver(employerId = it.employerId, driverId = it.driverId) }
+    }
+
+    LaunchedEffect(Unit) {
+        cargoViewModel.fetchUnreadMessageCount(chatId)
     }
 
     Scaffold(
@@ -87,72 +95,7 @@ fun DetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel
             )
         },
         bottomBar = {
-            BottomAppBar(
-                containerColor = BlueBar,
-                contentPadding = PaddingValues(horizontal = 10.dp, vertical = 10.dp),
-            ) {
-                Spacer(modifier = Modifier.weight(0.5f))
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            painterResource(id = R.drawable.user),
-                            contentDescription = null,
-                            modifier = Modifier.size(30.dp)
-                        )
-                    },
-                    selected = true,
-                    onClick = {},
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = DarkBlue,
-                        unselectedIconColor = BlueBar,
-                        indicatorColor = Color.Transparent
-                    ),
-                    modifier = Modifier
-                        .background(Color.White, shape = RoundedCornerShape(50))
-                        .scale(1.5f)
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            painterResource(id = R.drawable.cargo),
-                            contentDescription = null,
-                            modifier = Modifier.size(30.dp)
-                        )
-                    },
-                    selected = false,
-                    onClick = {},
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = DarkBlue,
-                        unselectedIconColor = BlueBar,
-                        indicatorColor = Color.Transparent
-                    ),
-                    modifier = Modifier
-                        .background(Color.White, shape = RoundedCornerShape(50))
-                        .scale(1.5f)
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            painterResource(id = R.drawable.chat),
-                            contentDescription = null,
-                            modifier = Modifier.size(30.dp)
-                        )
-                    },
-                    selected = false,
-                    onClick = {},
-                    colors = NavigationBarItemDefaults.colors(
-                        selectedIconColor = DarkBlue,
-                        unselectedIconColor = BlueBar,
-                        indicatorColor = Color.Transparent
-                    ),
-                    modifier = Modifier
-                        .background(Color.White, shape = RoundedCornerShape(50))
-                        .scale(1.5f)
-                )
-                Spacer(modifier = Modifier.weight(0.5f))
-            }
+            DriverBottomAppBarWithBadge(unreadMessageCount = unreadMessageCount)
         }
     ) { innerPadding ->
         Column(
