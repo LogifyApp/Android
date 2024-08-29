@@ -11,4 +11,6 @@ interface ApiMessageService {
         @Query("chatId") chatId: Int,
         @Query("lastOpened") lastOpened: LocalDateTime
     ): Int
+
+    //TODO redo endpoint logic
 }

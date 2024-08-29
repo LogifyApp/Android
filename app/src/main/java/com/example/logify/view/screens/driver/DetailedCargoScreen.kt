@@ -3,7 +3,6 @@ package com.example.logify.view.screens.driver
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -12,7 +11,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -24,17 +22,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.logify.R
 import com.example.logify.data.Cargo
 import com.example.logify.data.CargoStatusInfo
-import com.example.logify.data.Point
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
-import com.example.logify.ui.theme.DarkBlue
 import com.example.logify.ui.theme.GreenStatus
 import com.example.logify.ui.theme.LightBlueStatus
 import com.example.logify.ui.theme.LightGreenStatus
 import com.example.logify.ui.theme.OrangeStatus
 import com.example.logify.ui.theme.RedStatus
 import com.example.logify.view.components.DetailedCargoRow
-import com.example.logify.view.components.DetailedPointRow
 import com.example.logify.view.components.DriverBottomAppBarWithBadge
 import com.example.logify.viewmodel.CargoViewModel
 

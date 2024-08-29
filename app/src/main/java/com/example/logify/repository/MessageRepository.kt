@@ -11,6 +11,7 @@ import javax.inject.Singleton
 class MessageRepository @Inject constructor(private val apiMessageService: ApiMessageService, private val chatLastOpenedDao: ChatLastOpenedDao) {
     suspend fun getUnreadMessageCount(chatId: Int, lastOpened: LocalDateTime): Int {
         return apiMessageService.getUnreadMessageCount(chatId, lastOpened)
+        //TODO redo calculation based on endpoint logic
     }
 
     suspend fun getLastOpened(chatId: Int): LocalDateTime? {
