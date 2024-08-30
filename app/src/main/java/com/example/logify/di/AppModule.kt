@@ -5,9 +5,11 @@ import androidx.room.Room
 import com.example.logify.dao.AppDatabase
 import com.example.logify.dao.CargoDao
 import com.example.logify.dao.ChatLastOpenedDao
+import com.example.logify.dao.DocumentDao
 import com.example.logify.dao.TokenDao
 import com.example.logify.dao.UserDao
 import com.example.logify.repository.CargoRepository
+import com.example.logify.repository.DocumentRepository
 import com.example.logify.repository.MessageRepository
 import com.example.logify.repository.TokenRepository
 import com.example.logify.repository.UserRepository
@@ -140,5 +142,20 @@ object AppModule {
     @Singleton
     fun provideChatLastOpenedDao(database: AppDatabase): ChatLastOpenedDao {
         return database.chatLastOpenedDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDocumentDao(database: AppDatabase): DocumentDao {
+        return database.documentDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDocumentRepository(
+        @ApplicationContext context: Context,
+        documentDao: DocumentDao
+    ): DocumentRepository {
+        return DocumentRepository(context, documentDao)
     }
 }

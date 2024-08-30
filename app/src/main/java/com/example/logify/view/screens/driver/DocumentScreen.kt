@@ -31,16 +31,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.FileProvider
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.logify.R
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.GreenStatus
 import com.example.logify.view.components.DriverBottomAppBarWithBadge
+import com.example.logify.viewmodel.DocumentViewModel
 import java.io.File
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DocumentScreen() {
+fun DocumentScreen(documentViewModel: DocumentViewModel = hiltViewModel()) {
+
+    //TODO implement documentViewModel here where necessary
+
     var documentList by remember { mutableStateOf(listOf<File>()) }
     val context = LocalContext.current
 

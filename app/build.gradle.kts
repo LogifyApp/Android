@@ -87,6 +87,7 @@ dependencies {
 
     implementation(libs.androidx.room.runtime)
     kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
