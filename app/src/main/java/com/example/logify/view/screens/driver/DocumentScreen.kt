@@ -9,7 +9,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
@@ -19,13 +18,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -80,10 +77,6 @@ fun DocumentScreen() {
         ) {
             Button(
                 onClick = {
-                    // Function to add documents (you need to implement the logic)
-                    // For example, open a file picker and add selected file to the list
-                    // val newFile = File(...) // file picked by the user
-                    // documentList = documentList + newFile
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = GreenStatus, contentColor = Color.White),
                 modifier = Modifier
@@ -155,11 +148,9 @@ fun DocumentRow(document: File, onRemove: (File) -> Unit, onOpen: (File) -> Unit
     }
 }
 
-// Function to open the document (this is a placeholder, you need to implement the logic)
 fun openDocument(context: Context, file: File) {
     try {
         val uri: Uri = FileProvider.getUriForFile(context, "${context.packageName}.provider", file)
-        // Implement the logic to open the file using an appropriate app
         Toast.makeText(context, "Opening ${file.name}", Toast.LENGTH_SHORT).show()
     } catch (e: Exception) {
         Toast.makeText(context, "Cannot open ${file.name}", Toast.LENGTH_SHORT).show()
