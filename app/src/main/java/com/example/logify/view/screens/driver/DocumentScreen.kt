@@ -1,8 +1,12 @@
 package com.example.logify.view.screens.driver
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
+import android.webkit.MimeTypeMap
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -37,12 +41,17 @@ import java.io.File
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DocumentScreen() {
-    var documentList by remember { mutableStateOf(listOf<File>(
-        File("document1.pdf"),
-        File("document2.pdf"),
-        File("document3.pdf")
-    )) }
+    var documentList by remember { mutableStateOf(listOf<File>()) }
     val context = LocalContext.current
+
+    val filePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.OpenMultipleDocuments()
+    ) { uris ->
+        val newFiles = uris.mapNotNull { uri ->
+            uriToFile(context, uri)
+        }
+        documentList = documentList + newFiles
+    }
 
     Scaffold(
         bottomBar = {
@@ -57,7 +66,7 @@ fun DocumentScreen() {
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = { /* Handle navigation back */ }) {
+                    IconButton(onClick = { /* TODO Handle navigation back */ }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
                 },
@@ -77,6 +86,7 @@ fun DocumentScreen() {
         ) {
             Button(
                 onClick = {
+                    filePickerLauncher.launch(arrayOf("application/pdf"))
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = GreenStatus, contentColor = Color.White),
                 modifier = Modifier
@@ -151,10 +161,39 @@ fun DocumentRow(document: File, onRemove: (File) -> Unit, onOpen: (File) -> Unit
 fun openDocument(context: Context, file: File) {
     try {
         val uri: Uri = FileProvider.getUriForFile(context, "${context.packageName}.provider", file)
-        Toast.makeText(context, "Opening ${file.name}", Toast.LENGTH_SHORT).show()
+        val mimeType = getMimeType(file)
+
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, mimeType)
+            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        }
+
+        if (intent.resolveActivity(context.packageManager) != null) {
+            context.startActivity(intent)
+        } else {
+            Toast.makeText(context, "No application available to open this file", Toast.LENGTH_SHORT).show()
+        }
     } catch (e: Exception) {
         Toast.makeText(context, "Cannot open ${file.name}", Toast.LENGTH_SHORT).show()
     }
+}
+
+fun getMimeType(file: File): String? {
+    val extension = MimeTypeMap.getFileExtensionFromUrl(file.toString())
+    return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.lowercase())
+}
+
+fun uriToFile(context: Context, uri: Uri): File? {
+    val filePathColumn = arrayOf(android.provider.MediaStore.Files.FileColumns.DATA)
+    val cursor = context.contentResolver.query(uri, filePathColumn, null, null, null)
+    cursor?.use {
+        if (it.moveToFirst()) {
+            val columnIndex = it.getColumnIndexOrThrow(filePathColumn[0])
+            val filePath = it.getString(columnIndex)
+            return File(filePath)
+        }
+    }
+    return null
 }
 
 @Preview(showBackground = true)
