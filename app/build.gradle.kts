@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -20,6 +22,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        val googleMapsApiKey: String? = properties.getProperty("GOOGLE_MAPS_API_KEY")
+        manifestPlaceholders["googleMapsApiKey"] = googleMapsApiKey ?: throw GradleException("GOOGLE_MAPS_API_KEY is missing from local.properties")
     }
 
     buildTypes {
@@ -65,6 +72,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.transport.runtime)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -72,7 +80,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
+    implementation(libs.play.services.base)
+    implementation(libs.maps.compose)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
