@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.logify.R
 import com.example.logify.data.Cargo
+import com.example.logify.enums.CargoStatusInfo
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BorderStatus
 import com.example.logify.ui.theme.CargoCardBackground
@@ -33,15 +34,8 @@ import com.example.logify.ui.theme.RedStatus
 import java.util.Date
 
 @Composable
-fun CargoItemCard(cargoItem: Cargo) {
-    val statusColor = when (cargoItem.status) {
-        "Created" -> LightBlueStatus
-        "Started" -> GreenStatus
-        "In-check" -> OrangeStatus
-        "Finished" -> LightGreenStatus
-        "Problem" -> RedStatus
-        else -> Color.Transparent
-    }
+fun CargoItemCard(cargo: Cargo) {
+    val cargoStatusInfo = CargoStatusInfo.fromStatus(cargo.status)
 
     Row(
         modifier = Modifier
@@ -63,7 +57,7 @@ fun CargoItemCard(cargoItem: Cargo) {
             modifier = Modifier.weight(1f)
         ) {
             Text(
-                text = "№${cargoItem.id}",
+                text = "№${cargo.id}",
                 style = TextStyle(fontFamily = FontFamily(Font(R.font.opensans_semibold)),
                 fontSize = 18.sp)
             )
@@ -74,16 +68,16 @@ fun CargoItemCard(cargoItem: Cargo) {
         ) {
             Box(
                 modifier = Modifier
-                    .background(statusColor, shape = RoundedCornerShape(16.dp))
+                    .background(cargoStatusInfo.color, shape = RoundedCornerShape(16.dp))
                     .padding(horizontal = 16.dp)
             ) {
-                Text(text = cargoItem.status, color = Color.White,
+                Text(text = cargo.status, color = Color.White,
                     style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_semibold))),
                     fontSize = 14.sp)
             }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = cargoItem.creationDate.toString(),
+                text = cargo.creationDate,
                 style = TextStyle(fontFamily = FontFamily(Font(R.font.opensans_semibold))),
                 fontSize = 14.sp
             )
@@ -95,21 +89,21 @@ fun CargoItemCard(cargoItem: Cargo) {
 @Composable
 fun CargoList(cargoItems: List<Cargo>) {
     LazyColumn {
-        items(cargoItems) { cargoItem ->
-            CargoItemCard(cargoItem = cargoItem)
+        items(cargoItems) { cargo ->
+            CargoItemCard(cargo = cargo)
         }
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun CargoListPreview() {
-//    val cargoItems = listOf(
-//        Cargo(id = 31023, status = "Created", creationDate = "4.05.2024", carId = 1, driverId = 1),
-//        Cargo(id = 31024, status = "Started", creationDate = "4.05.2024", carId = 1, driverId = 1),
-//        Cargo(id = 31023,  status = "In-check", creationDate = "4.05.2024", carId = 1, driverId = 1),
-//        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1),
-//        Cargo(id = 31023,  status = "Problem", creationDate = "4.05.2024", carId = 1, driverId = 1)
-//    )
-//    CargoList(cargoItems = cargoItems)
-//}
+@Preview(showBackground = true)
+@Composable
+fun CargoListPreview() {
+    val cargoItems = listOf(
+        Cargo(id = 31023, status = "Created", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1),
+        Cargo(id = 31024, status = "Started", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1),
+        Cargo(id = 31023,  status = "In-check", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1),
+        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1),
+        Cargo(id = 31023,  status = "Problem", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1)
+    )
+    CargoList(cargoItems = cargoItems)
+}

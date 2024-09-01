@@ -1,4 +1,4 @@
-package com.example.logify.view.screens.driver
+package com.example.logify.view.screens.employer
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -6,43 +6,46 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.logify.R
+import com.example.logify.data.Cargo
 import com.example.logify.enums.CargoStatusInfo
-import com.example.logify.ui.theme.BackgroundLightBlue
-import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.*
 import com.example.logify.view.components.DetailedCargoRow
 import com.example.logify.view.components.DriverBottomAppBarWithBadge
-import com.example.logify.viewmodel.CargoViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel(), chatId: Int) {
-    val cargo by cargoViewModel.selectedCargo.observeAsState()
+//fun EDetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel(), chatId: Int) {
+fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
+    val cargo = Cargo(131231, "Created", "01.08.1980", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+            "Curabitur a ipsum fermentum, consectetur ex quis, tempor est. elementum mi ligula eu est. " +
+            "Duis hendrerit ullamcorper justo", 1, 1, 1)
+
+
+//    val cargo by cargoViewModel.selectedCargo.observeAsState()
+
     val cargoStatusInfo = CargoStatusInfo.fromStatus(cargo?.status ?: "Problem")
-    //TODO val points by pointViewModel.points.observeAsState(emptyList())
 
-    val unreadMessageCount by cargoViewModel.unreadMessageCount.collectAsState(0)
-
-    LaunchedEffect(Unit) {
-        cargo?.let { cargoViewModel.loadCargosByDriver(employerId = it.employerId, driverId = it.driverId) }
-    }
-
-    LaunchedEffect(Unit) {
-        cargoViewModel.fetchUnreadMessageCount(chatId)
-    }
+//    //TODO val points by pointViewModel.points.observeAsState(emptyList())
+//
+//    val unreadMessageCount by cargoViewModel.unreadMessageCount.collectAsState(0)
+//
+//    LaunchedEffect(Unit) {
+//        cargo?.let { cargoViewModel.loadCargosByDriver(employerId = it.employerId, driverId = it.driverId) }
+//    }
+//
+//    LaunchedEffect(Unit) {
+//        cargoViewModel.fetchUnreadMessageCount(chatId)
+//    }
 
     Scaffold(
         topBar = {
@@ -85,7 +88,7 @@ fun DetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel
             )
         },
         bottomBar = {
-            DriverBottomAppBarWithBadge(unreadMessageCount = unreadMessageCount)
+            DriverBottomAppBarWithBadge(unreadMessageCount = 1)
         }
     ) { innerPadding ->
         Column(
@@ -100,28 +103,27 @@ fun DetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(20.dp)
-                        .background(cargoStatusInfo.color, shape = RoundedCornerShape(4.dp)),
-                    colors = ButtonDefaults.buttonColors(containerColor = cargoStatusInfo.color)
+                        .background(AttachedStatus, shape = RoundedCornerShape(4.dp)), // Always green button
+                    colors = ButtonDefaults.buttonColors(containerColor = AttachedStatus)
                 ) {
                     Text(
-                        cargoStatusInfo.phrase,
+                        "Attached documents",
                         color = Color.White,
                         style = TextStyle(
                             fontFamily = FontFamily(Font(R.font.palanquin_medium)),
                             fontSize = 24.sp
                         )
                     )
-                    cargoStatusInfo.icon?.let {
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Icon(
-                            painterResource(id = it),
-                            contentDescription = null,
-                            tint = Color.White,
-                            modifier = Modifier.size(28.dp)
-                        )
-                    }
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Icon(
+                        painterResource(id = R.drawable.attach), // Attach icon
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(28.dp)
+                    )
                 }
                 HorizontalDivider(color = BlueBar, thickness = 1.dp)
+
 
                 LazyColumn(
                     modifier = Modifier
@@ -146,4 +148,10 @@ fun DetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun Preview(){
+    EDetailedCargoScreen(1, 1)
 }

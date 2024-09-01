@@ -18,6 +18,7 @@ val BackgroundLightBlue = Color(0xFFC6E3F6)
 
 val CargoCardBackground = Color(0xFFE9F4FB)
 val LightBlueStatus = Color(0xFF27B5E2)
+val AttachedStatus = Color(0xFF4387BD)
 val GreenStatus = Color(0xFF25751E)
 val OrangeStatus = Color(0xFFCF770F)
 val LightGreenStatus = Color(0xFF42D56B)

@@ -17,42 +17,24 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Red
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
-import com.example.logify.data.Cargo
 import com.example.logify.ui.theme.BackgroundLightBlue
-import com.example.logify.ui.theme.Black
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.GreenStatus
-import com.example.logify.view.components.CargoList
 import com.example.logify.view.components.CustomSearchField
-import com.example.logify.view.components.DriverBottomAppBarWithBadge
 import com.example.logify.view.components.EmployerBottomAppBar
-import com.example.logify.viewmodel.CargoViewModel
 import com.google.accompanist.insets.ProvideWindowInsets
-import java.time.LocalDateTime
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CargoScreen() {
+fun ECargoScreen() {
     var dummySearch = ""
 //    val cargos by cargoViewModel.cargos.observeAsState(emptyList())
 //        var search by remember { mutableStateOf("") }
@@ -161,5 +143,5 @@ fun AddButton(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 fun PreviewCargoScreen(){
-    CargoScreen()
+    ECargoScreen()
 }

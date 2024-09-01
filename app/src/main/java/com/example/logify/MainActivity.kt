@@ -20,6 +20,7 @@ import com.example.logify.view.screens.LoginScreen
 import com.example.logify.view.screens.RegisterScreen
 import com.example.logify.view.screens.driver.ChatScreen
 import com.example.logify.view.screens.driver.DetailedCargoScreen
+import com.example.logify.view.screens.employer.ECargoScreen
 import com.example.logify.viewmodel.CargoViewModel
 import com.example.logify.viewmodel.TokenViewModel
 import com.example.logify.viewmodel.UserViewModel
@@ -64,7 +65,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
             composable("chat") { ChatScreen() }
-            composable("empCargo") { com.example.logify.view.screens.employer.CargoScreen() }
+            composable("empCargo") { ECargoScreen() }
         }
     }
 }
