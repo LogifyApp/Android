@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AppContent(navController: NavHostController, userViewModel: UserViewModel, cargoViewModel: CargoViewModel) {
-        NavHost(navController = navController, startDestination = "chat") {
+        NavHost(navController = navController, startDestination = "empCargo") {
             composable("initial") { InitialScreen(navController) }
             composable("login") { LoginScreen(navController, userViewModel) }
             composable("register") { RegisterScreen(navController, userViewModel) }
@@ -64,6 +64,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
             composable("chat") { ChatScreen() }
+            composable("empCargo") { com.example.logify.view.screens.employer.CargoScreen() }
         }
     }
 }

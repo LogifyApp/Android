@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.logify.data.Message
 import com.example.logify.ui.theme.BackgroundLightBlue
+import com.example.logify.ui.theme.BlueBar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -80,7 +81,7 @@ fun ChatScreen() {
                 },
                 onDone = {
                     coroutineScope.launch {
-                        delay(50) // Ensure that the keyboard has opened before scrolling
+                        delay(50)
                         listState.animateScrollToItem(messages.size - 1)
                     }
                 }
@@ -143,7 +144,7 @@ fun ChatTopBar() {
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color(0xFF1976D2)
+            containerColor = BlueBar
         ),
         modifier = Modifier.fillMaxWidth()
     )
@@ -165,7 +166,7 @@ fun ChatMessages(messages: List<Message>, listState: LazyListState) {
 
 @Composable
 fun ChatMessageRow(message: Message) {
-    val backgroundColor = if (message.isUser) Color(0xFF1976D2) else Color.White
+    val backgroundColor = if (message.isUser) BlueBar else Color.White
     val textColor = if (message.isUser) Color.White else Color.Black
 
     Row(
@@ -224,7 +225,7 @@ fun MessageInput(
             onSend()
             onDone()
         }) {
-            Icon(Icons.Default.Send, contentDescription = "Send", tint = Color(0xFF1976D2))
+            Icon(Icons.Default.Send, contentDescription = "Send", tint = BlueBar)
         }
     }
 }
