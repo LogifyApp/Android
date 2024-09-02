@@ -34,9 +34,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.logify.R
+import com.example.logify.data.Car
 import com.example.logify.data.User
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.view.components.CarList
 import com.example.logify.view.components.DriverList
 import com.example.logify.view.components.EmployerBottomAppBar
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -44,10 +46,14 @@ import com.google.accompanist.insets.ProvideWindowInsets
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EChooseDriverScreen() {
-//    val drivers by driverViewModel.drivers.observeAsState(emptyList())
-    val drivers by remember { mutableStateOf(listOf<User>(User(1, "Name", "Surname", "+484832843824", "Driver"), User(1, "Name", "Surname", "+484832843824", "Driver"), User(1, "Name", "Surname", "+484832843824", "Driver"))) }
-
+fun EChooseCarScreen() {
+//    val cars by carViewModel.cars.observeAsState(emptyList())
+    val cars by remember { mutableStateOf(listOf<Car>(
+        Car("C3JN6C", "Ducatto", "Renault", true, 1),
+        Car("C31NAC", "Ducatto", "Renault", true, 1),
+        Car("CNA75C", "Ducatto", "Renault", false, 1),
+        Car("CN3A6C", "Ducatto", "Renault", false, 1)))
+    }
     ProvideWindowInsets {
         Box(
             modifier = Modifier
@@ -94,12 +100,12 @@ fun EChooseDriverScreen() {
                         Box(modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp), contentAlignment = Alignment.Center){
-                            Text(text = "Choose driver from the list", fontSize = 24.sp,
+                            Text(text = "Choose car from the list", fontSize = 24.sp,
                                 style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_bold))))
                         }
                         HorizontalDivider(color = BlueBar, thickness = 1.dp)
                         Spacer(modifier = Modifier.height(16.dp))
-                        DriverList(driverItems = drivers)
+                        CarList(carItems = cars)
                     }
                 }
             }
@@ -109,6 +115,6 @@ fun EChooseDriverScreen() {
 
 @Preview
 @Composable
-fun PreviewChoose(){
-    EChooseDriverScreen()
+fun PreviewChooseCar(){
+    EChooseCarScreen()
 }
