@@ -36,6 +36,10 @@ import java.time.LocalDateTime
 @Composable
 fun CargoScreen(cargoViewModel: CargoViewModel, employerId: Int, chatId: Int,
                 lastChatOpenDateTime: LocalDateTime) {
+
+    //TODO add custom animation of loading cargos (https://chatgpt.com/c/6045b5b9-3454-40ac-b787-3bc3e29e54cb)
+    // https://uiball.com/ldrs/
+
     val cargos by cargoViewModel.cargos.observeAsState(emptyList())
     var search by remember { mutableStateOf("") }
     var filteredItems by remember { mutableStateOf(cargos) }

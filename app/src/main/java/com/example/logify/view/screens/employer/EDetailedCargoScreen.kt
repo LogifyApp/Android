@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -21,6 +22,7 @@ import com.example.logify.enums.CargoStatusInfo
 import com.example.logify.ui.theme.*
 import com.example.logify.view.components.DetailedCargoRow
 import com.example.logify.view.components.DriverBottomAppBarWithBadge
+import com.example.logify.view.components.EmployerBottomAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -88,7 +90,7 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
             )
         },
         bottomBar = {
-            DriverBottomAppBarWithBadge(unreadMessageCount = 1)
+            EmployerBottomAppBar(unreadMessageCount = 1)
         }
     ) { innerPadding ->
         Column(
@@ -102,8 +104,10 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
                     onClick = { /* Handle send documents */ },
                     modifier = Modifier
                         .fillMaxWidth()
+                        .height(120.dp)
                         .padding(20.dp)
-                        .background(AttachedStatus, shape = RoundedCornerShape(4.dp)), // Always green button
+                        .clip(RoundedCornerShape(20))
+                        .background(AttachedStatus),
                     colors = ButtonDefaults.buttonColors(containerColor = AttachedStatus)
                 ) {
                     Text(
@@ -135,7 +139,20 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
                         HorizontalDivider(color = BlueBar, thickness = 1.dp)
                         DetailedCargoRow(label = "Car number", value = cargo.carId.toString())
                         HorizontalDivider(color = BlueBar, thickness = 1.dp)
-                        DetailedCargoRow(label = "Description", value = cargo.description)
+                        DetailedCargoRow(
+                            label = "Description",
+                            value = cargo.description,
+                            trailingIcon = {
+                                IconButton(onClick = { /* Handle edit description */ }) {
+                                    Icon(
+                                        painterResource(id = R.drawable.edit),
+                                        contentDescription = "Edit description",
+                                        tint = Color.Black,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+                            }
+                        )
                         HorizontalDivider(color = BlueBar, thickness = 1.dp)
                     }
 
