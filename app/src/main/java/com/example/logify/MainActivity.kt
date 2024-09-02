@@ -13,10 +13,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.logify.data.Cargo
+import com.example.logify.data.User
 import com.example.logify.ui.theme.LogifyTheme
 import com.example.logify.view.screens.driver.CargoScreen
 import com.example.logify.view.screens.InitialScreen
 import com.example.logify.view.screens.LoginScreen
+import com.example.logify.view.screens.MapScreen
 import com.example.logify.view.screens.RegisterScreen
 import com.example.logify.view.screens.driver.ChatScreen
 import com.example.logify.view.screens.driver.DetailedCargoScreen
@@ -54,7 +56,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AppContent(navController: NavHostController, userViewModel: UserViewModel, cargoViewModel: CargoViewModel) {
-        NavHost(navController = navController, startDestination = "empDetCargo") {
+        NavHost(navController = navController, startDestination = "map") {
             composable("initial") { InitialScreen(navController) }
             composable("login") { LoginScreen(navController, userViewModel) }
             composable("register") { RegisterScreen(navController, userViewModel) }
@@ -67,6 +69,7 @@ class MainActivity : ComponentActivity() {
             }
             composable("chat") { ChatScreen() }
             composable("empCargo") { ECargoScreen() }
+            composable("map") { MapScreen(User(1, "Name", "Surname", "+484832843824", "Driver")) }
             composable("empDetCargo") { EDetailedCargoScreen(cargoId = 1, chatId = 1) }
         }
     }
