@@ -21,13 +21,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.logify.R
 import com.example.logify.data.Cargo
+import com.example.logify.data.User
 import com.example.logify.enums.CargoStatusInfo
 import com.example.logify.ui.theme.BorderStatus
 import com.example.logify.ui.theme.CargoCardBackground
+import com.example.logify.ui.theme.GreenStatus
+
 
 @Composable
-fun CargoItemCard(cargo: Cargo) {
-    val cargoStatusInfo = CargoStatusInfo.fromStatus(cargo.status)
+fun DriverItemCard(user: User) {
+//    val driverStatusInfo
+//TODO call a fun from back-end to check if driver has active cargos now
 
     Row(
         modifier = Modifier
@@ -40,7 +44,7 @@ fun CargoItemCard(cargo: Cargo) {
     ) {
         Spacer(modifier = Modifier.width(16.dp))
         Image(
-            painter = painterResource(id = R.drawable.delivery_truck),
+            painter = painterResource(id = R.drawable.driver),
             contentDescription = null,
             modifier = Modifier.size(40.dp)
         )
@@ -49,53 +53,49 @@ fun CargoItemCard(cargo: Cargo) {
             modifier = Modifier.weight(1f)
         ) {
             Text(
-                text = "№${cargo.id}",
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.opensans_semibold)),
-                fontSize = 18.sp)
+                text = user.name + " " + user.surname,
+                style = TextStyle(
+                    fontFamily = FontFamily(Font(R.font.opensans_semibold)),
+                    fontSize = 18.sp
+                )
             )
         }
+        Box(
+            modifier = Modifier
+                .background(GreenStatus, shape = RoundedCornerShape(16.dp))
+                .padding(horizontal = 16.dp)
+        ) {
+            Text(text = "Ready", color = Color.White,
+                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_semibold))),
+                fontSize = 14.sp)
+        }
+
         Spacer(modifier = Modifier.width(16.dp))
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(
-                modifier = Modifier
-                    .background(cargoStatusInfo.color, shape = RoundedCornerShape(16.dp))
-                    .padding(horizontal = 16.dp)
-            ) {
-                Text(text = cargo.status, color = Color.White,
-                    style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_semibold))),
-                    fontSize = 14.sp)
-            }
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = cargo.creationDate,
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.opensans_semibold))),
-                fontSize = 14.sp
-            )
         }
         Spacer(modifier = Modifier.width(8.dp))
     }
 }
 
 @Composable
-fun CargoList(cargoItems: List<Cargo>) {
+fun DriverList(driverItems: List<User>) {
     LazyColumn {
-        items(cargoItems) { cargo ->
-            CargoItemCard(cargo = cargo)
+        items(driverItems) { driver ->
+            DriverItemCard(user = driver)
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun CargoListPreview() {
-    val cargoItems = listOf(
-        Cargo(id = 31023, status = "Created", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1),
-        Cargo(id = 31024, status = "Started", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1),
-        Cargo(id = 31023,  status = "In-check", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1),
-        Cargo(id = 31023,  status = "Finished", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1),
-        Cargo(id = 31023,  status = "Problem", creationDate = "4.05.2024", carId = 1, driverId = 1, description = "sfdfildnfnsdnfisfnsdlfnsd", employerId = 1)
+fun DriverListPreview() {
+    val driverItems = listOf(
+        User(1, "Name", "Surname", "+484832843824", "Driver"),
+        User(1, "Name", "Surname", "+484832843824", "Driver"),
+        User(1, "Name", "Surname", "+484832843824", "Driver"),
+        User(1, "Name", "Surname", "+484832843824", "Driver")
     )
-    CargoList(cargoItems = cargoItems)
+    DriverList(driverItems = driverItems)
 }
