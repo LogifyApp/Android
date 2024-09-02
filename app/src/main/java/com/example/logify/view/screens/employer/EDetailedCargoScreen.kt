@@ -6,6 +6,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -28,9 +32,12 @@ import com.example.logify.view.components.EmployerBottomAppBar
 @Composable
 //fun EDetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel(), chatId: Int) {
 fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
-    val cargo = Cargo(131231, "Created", "01.08.1980", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+    var cargo by remember {
+        mutableStateOf( Cargo(131231, "Created", "01.08.1980", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
             "Curabitur a ipsum fermentum, consectetur ex quis, tempor est. elementum mi ligula eu est. " +
             "Duis hendrerit ullamcorper justo", 1, 1, 1)
+        )
+    }
 
 
 //    val cargo by cargoViewModel.selectedCargo.observeAsState()
@@ -57,7 +64,6 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center
                     ) {
-                        Spacer(modifier = Modifier.width(50.dp))
                         Text(
                             "№${cargo?.id}",
                             fontSize = 26.sp,
@@ -66,6 +72,19 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
                                 color = Color.White
                             )
                         )
+                    }
+                },
+                navigationIcon = {
+                    Row {
+                        Spacer(modifier = Modifier.width(8.dp)) // Move icon slightly to the right
+                        IconButton(onClick = { cargo = cargo.copy(status = "Problem") }) {
+                            Icon(
+                                painterResource(id = R.drawable.problem_report), // Replace with your report icon
+                                contentDescription = "Report",
+                                tint = OrangeStatus,
+                                modifier = Modifier.size(28.dp)
+                            )
+                        }
                     }
                 },
                 actions = {

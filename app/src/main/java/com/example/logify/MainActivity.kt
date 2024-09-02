@@ -21,6 +21,7 @@ import com.example.logify.view.screens.RegisterScreen
 import com.example.logify.view.screens.driver.ChatScreen
 import com.example.logify.view.screens.driver.DetailedCargoScreen
 import com.example.logify.view.screens.employer.ECargoScreen
+import com.example.logify.view.screens.employer.EDetailedCargoScreen
 import com.example.logify.viewmodel.CargoViewModel
 import com.example.logify.viewmodel.TokenViewModel
 import com.example.logify.viewmodel.UserViewModel
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AppContent(navController: NavHostController, userViewModel: UserViewModel, cargoViewModel: CargoViewModel) {
-        NavHost(navController = navController, startDestination = "empCargo") {
+        NavHost(navController = navController, startDestination = "empDetCargo") {
             composable("initial") { InitialScreen(navController) }
             composable("login") { LoginScreen(navController, userViewModel) }
             composable("register") { RegisterScreen(navController, userViewModel) }
@@ -66,6 +67,7 @@ class MainActivity : ComponentActivity() {
             }
             composable("chat") { ChatScreen() }
             composable("empCargo") { ECargoScreen() }
+            composable("empDetCargo") { EDetailedCargoScreen(cargoId = 1, chatId = 1) }
         }
     }
 }
