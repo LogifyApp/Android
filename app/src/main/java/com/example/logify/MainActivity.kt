@@ -22,6 +22,7 @@ import com.example.logify.view.screens.MapScreen
 import com.example.logify.view.screens.RegisterScreen
 import com.example.logify.view.screens.driver.ChatScreen
 import com.example.logify.view.screens.driver.DetailedCargoScreen
+import com.example.logify.view.screens.employer.EAddStartPointScreen
 import com.example.logify.view.screens.employer.ECargoScreen
 import com.example.logify.view.screens.employer.EDetailedCargoScreen
 import com.example.logify.viewmodel.CargoViewModel
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AppContent(navController: NavHostController, userViewModel: UserViewModel, cargoViewModel: CargoViewModel) {
-        NavHost(navController = navController, startDestination = "map") {
+        NavHost(navController = navController, startDestination = "addStartPoint") {
             composable("initial") { InitialScreen(navController) }
             composable("login") { LoginScreen(navController, userViewModel) }
             composable("register") { RegisterScreen(navController, userViewModel) }
@@ -71,6 +72,7 @@ class MainActivity : ComponentActivity() {
             composable("empCargo") { ECargoScreen() }
             composable("map") { MapScreen(User(1, "Name", "Surname", "+484832843824", "Driver")) }
             composable("empDetCargo") { EDetailedCargoScreen(cargoId = 1, chatId = 1) }
+            composable("addStartPoint") { EAddStartPointScreen() }
         }
     }
 }

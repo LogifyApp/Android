@@ -98,6 +98,9 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
+    implementation(libs.places)
+    implementation(libs.volley)
+
     implementation(libs.androidx.room.ktx)
 }
 
