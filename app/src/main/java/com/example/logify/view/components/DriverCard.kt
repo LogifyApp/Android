@@ -33,7 +33,8 @@ import com.example.logify.ui.theme.GreenStatus
 @Composable
 fun DriverItemCardWithStatus(user: User) {
 //    val driverStatusInfo
-//TODO call a fun from back-end to check if driver has active cargos now
+    //TODO call a fun from back-end to check if driver has active cargos now
+    //TODO Fix style of text etc
 
     Row(
         modifier = Modifier
@@ -157,16 +158,20 @@ fun DriverItemCard(user: User) {
 
 @Composable
 fun DriverList(driverItems: List<User>, withStatus: Boolean) {
-    if (withStatus){
-        LazyColumn {
-            items(driverItems) { driver ->
-                DriverItemCardWithStatus(user = driver)
-            }
-        }
+    if (driverItems.isEmpty()){
+        Text(text = "You don’t have any employees yet")
     }else {
-        LazyColumn {
-            items(driverItems) { driver ->
-                DriverItemCard(user = driver)
+        if (withStatus){
+            LazyColumn {
+                items(driverItems) { driver ->
+                    DriverItemCardWithStatus(user = driver)
+                }
+            }
+        }else {
+            LazyColumn {
+                items(driverItems) { driver ->
+                    DriverItemCard(user = driver)
+                }
             }
         }
     }
