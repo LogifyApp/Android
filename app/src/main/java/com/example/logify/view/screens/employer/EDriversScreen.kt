@@ -8,14 +8,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -27,16 +21,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.logify.R
 import com.example.logify.data.User
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.view.components.AddFloatingButton
 import com.example.logify.view.components.DriverList
 import com.example.logify.view.components.EmployerBottomAppBar
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -44,7 +35,10 @@ import com.google.accompanist.insets.ProvideWindowInsets
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EChooseDriverScreen() {
+fun EDriversScreen() {
+
+    //TODO Fix design of text etc.
+
 //    val drivers by driverViewModel.drivers.observeAsState(emptyList())
     val drivers by remember { mutableStateOf(listOf<User>(User(1, "Name", "Surname", "+484832843824", "Driver"), User(1, "Name", "Surname", "+484832843824", "Driver"), User(1, "Name", "Surname", "+484832843824", "Driver"))) }
 
@@ -67,18 +61,15 @@ fun EChooseDriverScreen() {
                             ) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier.offset((-25).dp)
                                 ) {
-                                    Text(text = "Add new cargo", color = Color.White)
+                                    Text(text = "Drivers", color = Color.White)
                                 }
-                            }
-                        },
-                        navigationIcon = {
-                            IconButton(onClick = { /* Handle navigation back */ }) {
-                                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
                             }
                         }
                     )
+                },
+                floatingActionButton = {
+                    AddFloatingButton(imageVector = null, idOfDrawable = R.drawable.add_user) // Adding the button to the screen
                 },
                 bottomBar = {
                     EmployerBottomAppBar(unreadMessageCount = 1)
@@ -91,15 +82,8 @@ fun EChooseDriverScreen() {
                         .padding(innerPadding)
                 ) {
                     Column {
-                        Box(modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp), contentAlignment = Alignment.Center){
-                            Text(text = "Choose driver from the list", fontSize = 24.sp,
-                                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_bold))))
-                        }
-                        HorizontalDivider(color = BlueBar, thickness = 1.dp)
-                        Spacer(modifier = Modifier.height(16.dp))
-                        DriverList(driverItems = drivers, true)
+                        Spacer(modifier = Modifier.height(20.dp))
+                        DriverList(driverItems = drivers, false)
                     }
                 }
             }
@@ -109,6 +93,6 @@ fun EChooseDriverScreen() {
 
 @Preview
 @Composable
-fun PreviewChoose(){
-    EChooseDriverScreen()
+fun PreviewDrivers(){
+    EDriversScreen()
 }

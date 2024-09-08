@@ -39,7 +39,6 @@ import com.example.logify.data.User
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.view.components.CarList
-import com.example.logify.view.components.DriverList
 import com.example.logify.view.components.EmployerBottomAppBar
 import com.google.accompanist.insets.ProvideWindowInsets
 

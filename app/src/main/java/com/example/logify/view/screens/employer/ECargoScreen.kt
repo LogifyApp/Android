@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.GreenStatus
+import com.example.logify.view.components.AddFloatingButton
 import com.example.logify.view.components.CustomSearchField
 import com.example.logify.view.components.EmployerBottomAppBar
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -102,7 +103,7 @@ fun ECargoScreen() {
                     EmployerBottomAppBar(unreadMessageCount = 1)
                 },
                 floatingActionButton = {
-                    AddButton() // Adding the button to the screen
+                    AddFloatingButton(imageVector = Icons.Default.Add, idOfDrawable = null) // Adding the button to the screen
                 },
                 floatingActionButtonPosition = FabPosition.End,
                 modifier = Modifier
@@ -120,23 +121,6 @@ fun ECargoScreen() {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun AddButton(modifier: Modifier = Modifier) {
-    FloatingActionButton(
-        onClick = { /* Handle click */ },
-        containerColor = GreenStatus,
-        contentColor = Color.White,
-        modifier = modifier
-            .shadow(5.dp, CircleShape, clip = true)
-    ) {
-        Icon(
-            imageVector = Icons.Default.Add,
-            contentDescription = "Add",
-            modifier = Modifier.padding(12.dp)
-        )
     }
 }
 
