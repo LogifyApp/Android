@@ -16,6 +16,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.logify.R
+import com.example.logify.ui.theme.Open20Semi
+import com.example.logify.ui.theme.Pal26Bold
 
 @Composable
 fun DetailedCargoRow(label: String, value: String, trailingIcon: @Composable (() -> Unit)? = null) {
@@ -33,11 +35,7 @@ fun DetailedCargoRow(label: String, value: String, trailingIcon: @Composable (()
         ) {
             Row {
                 Text(
-                    text = label,
-                    style = TextStyle(
-                        fontFamily = FontFamily(Font(R.font.palanquin_bold)),
-                        fontSize = 26.sp
-                    )
+                    text = label, style = Pal26Bold
                 )
                 trailingIcon?.let {
                     Spacer(modifier = Modifier.width(8.dp))
@@ -45,11 +43,7 @@ fun DetailedCargoRow(label: String, value: String, trailingIcon: @Composable (()
                 }
             }
             Text(
-                text = value,
-                style = TextStyle(
-                    fontFamily = FontFamily(Font(R.font.opensans_semibold)),
-                    fontSize = 20.sp
-                )
+                text = value, style = Open20Semi
             )
         }
     }

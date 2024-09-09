@@ -22,6 +22,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import com.example.logify.R
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Open20Reg
+import com.example.logify.ui.theme.Open20Semi
 import java.io.File
 
 @Composable
@@ -39,7 +41,7 @@ fun DocumentRow(document: File, onRemove: (File) -> Unit, onOpen: (File) -> Unit
             text = AnnotatedString(document.name),
             onClick = { onOpen(document) },
             modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodyLarge
+            style = Open20Reg
         )
 
         IconButton(

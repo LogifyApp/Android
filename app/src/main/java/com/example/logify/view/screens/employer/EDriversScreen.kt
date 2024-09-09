@@ -27,6 +27,7 @@ import com.example.logify.R
 import com.example.logify.data.User
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Pal24SemiW
 import com.example.logify.view.components.AddFloatingButton
 import com.example.logify.view.components.DriverList
 import com.example.logify.view.components.EmployerBottomAppBar
@@ -62,7 +63,7 @@ fun EDriversScreen() {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                 ) {
-                                    Text(text = "Drivers", color = Color.White)
+                                    Text(text = "Drivers", style = Pal24SemiW)
                                 }
                             }
                         }

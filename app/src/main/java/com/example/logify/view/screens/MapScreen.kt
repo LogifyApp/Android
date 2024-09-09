@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.example.logify.R
 import com.example.logify.data.User
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Open26SemiW
 import com.example.logify.view.components.DriverBottomAppBarWithBadge
 import com.example.logify.view.components.EmployerBottomAppBar
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -60,9 +61,9 @@ fun MapScreen(user: User) {
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.offset((-25).dp)
                         ) {
-                            Text(text = "Route", color = Color.White)
+                            Text(text = "Route", style = Open26SemiW)
                             Icon(
-                                painter = painterResource(id = R.drawable.location), // Your location icon
+                                painter = painterResource(id = R.drawable.location),
                                 contentDescription = "Location Icon",
                                 tint = Color.White,
                                 modifier = Modifier.offset(x = 4.dp).size(24.dp)

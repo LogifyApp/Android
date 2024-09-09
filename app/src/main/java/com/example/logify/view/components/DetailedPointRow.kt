@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.logify.R
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Open13RegW
 
 @Composable
 fun DetailedPointRow(name: String, location: String) {
@@ -48,7 +49,7 @@ fun DetailedPointRow(name: String, location: String) {
             ) {
                 Text(
                     text = location,
-                    style = TextStyle(fontFamily = FontFamily(Font(R.font.opensans_regular)), fontSize = 13.sp, color = Color.White)
+                    style = Open13RegW
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Icon(

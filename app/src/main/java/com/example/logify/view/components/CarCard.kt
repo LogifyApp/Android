@@ -25,6 +25,9 @@ import com.example.logify.data.User
 import com.example.logify.ui.theme.BorderStatus
 import com.example.logify.ui.theme.CargoCardBackground
 import com.example.logify.ui.theme.GreenStatus
+import com.example.logify.ui.theme.Open18Semi
+import com.example.logify.ui.theme.Pal12Reg
+import com.example.logify.ui.theme.Pal14SemiW
 import com.example.logify.ui.theme.RedStatus
 
 
@@ -50,18 +53,10 @@ fun CarItemCard(car: Car) {
             modifier = Modifier.weight(1f)
         ) {
             Text(
-                text = car.number,
-                style = TextStyle(
-                    fontFamily = FontFamily(Font(R.font.opensans_semibold)),
-                    fontSize = 18.sp
-                )
+                text = car.number, style = Open18Semi
             )
             Text(
-                text = car.brand + " " + car.model,
-                style = TextStyle(
-                    fontFamily = FontFamily(Font(R.font.palanquin_regular)),
-                    fontSize = 12.sp
-                )
+                text = car.brand + " " + car.model, style = Pal12Reg
             )
         }
         Box(
@@ -69,9 +64,9 @@ fun CarItemCard(car: Car) {
                 .background(if(car.status) GreenStatus else RedStatus, shape = RoundedCornerShape(16.dp))
                 .padding(horizontal = 16.dp)
         ) {
-            Text(text = if(car.status) "Ready" else "In-ride", color = Color.White,
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_semibold))),
-                fontSize = 14.sp)
+            Text(
+                text = if(car.status) "Ready" else "In-ride", style = Pal14SemiW
+            )
         }
 
         Spacer(modifier = Modifier.width(16.dp))

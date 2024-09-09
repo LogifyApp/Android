@@ -44,6 +44,12 @@ import androidx.compose.ui.unit.sp
 import com.example.logify.R
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Pal15Med
+import com.example.logify.ui.theme.Pal18Med
+import com.example.logify.ui.theme.Pal20Bold
+import com.example.logify.ui.theme.Pal20Med
+import com.example.logify.ui.theme.Pal20MedW
+import com.example.logify.ui.theme.Pal32Bold
 import com.example.logify.view.components.DriverBottomAppBarWithBadge
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,8 +74,7 @@ fun ProfileScreen() {
                 ),
                 title = {
                     Text(
-                        text = "Profile",fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.palanquin_medium)), fontWeight = FontWeight.Medium,
-                        color = Color.White,
+                        text = "Profile", style = Pal20MedW,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 25.dp, end = 16.dp),
@@ -104,10 +109,10 @@ fun ProfileScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "John Ridkey",fontSize = 32.sp, fontFamily = FontFamily(Font(R.font.palanquin_bold)), fontWeight = FontWeight.Bold
+                    text = "John Ridkey", style = Pal32Bold
                 )
                 Text(
-                    text = "+4845393994",fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.palanquin_semibold)), fontWeight = FontWeight.SemiBold
+                    text = "+4845393994", style = Pal20Med
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -229,7 +234,7 @@ fun ProfileSection(title: String, content: @Composable () -> Unit) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = title, fontSize = 20.sp, fontFamily = FontFamily(Font(R.font.palanquin_bold)), fontWeight = FontWeight.Bold)
+        Text(text = title, style = Pal20Bold)
         Spacer(modifier = Modifier.height(8.dp))
         content()
     }
@@ -269,7 +274,7 @@ fun GPSOption(painterRes: Int, label: String) {
             )
         }
         Spacer(modifier = Modifier.height(4.dp))
-        Text(text = label, fontSize = 15.sp, fontFamily = FontFamily(Font(R.font.palanquin_medium)), fontWeight = FontWeight.Medium, textAlign = TextAlign.Center)
+        Text(text = label, style = Pal15Med, textAlign = TextAlign.Center)
     }
 }
 

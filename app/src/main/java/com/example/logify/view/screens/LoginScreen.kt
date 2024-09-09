@@ -44,6 +44,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.logify.R
+import com.example.logify.ui.theme.Pal20Med
+import com.example.logify.ui.theme.PalDark48RegB
 import com.example.logify.view.components.CustomPasswordTextField
 import com.example.logify.view.components.CustomTextField
 import com.example.logify.viewmodel.UserViewModel
@@ -65,84 +67,71 @@ fun LoginScreen(navController: NavController, viewModel: UserViewModel = viewMod
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
 
-    Image(
-        painter = painterResource(id = R.drawable.complex_background),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-        modifier = Modifier.fillMaxSize()
-    )
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
         Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Logify Logo",
-            modifier = Modifier.size(220.dp)
+            painter = painterResource(id = R.drawable.complex_background),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Logify", fontSize = 48.sp, color = Color.Black,
-            style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquindark_regular, FontWeight.Normal)))
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        CustomTextField(
-            value = phoneNumber,
-            onValueChange = { phoneNumber = it },
-            label = "Phone Number",
-            focusRequester = focusRequesterPhone,
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-            keyboardActions = KeyboardActions(onNext = { focusRequesterPassword.requestFocus() })
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        CustomPasswordTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = "Password",
-            focusRequester = focusRequesterPassword,
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() })
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        Button(
-            onClick = {
-                try {
-                    val userResponse = viewModel.login(phoneNumber, password)
-                    if (userResponse != null) {
-                        viewModel.insertUser(userResponse)
-                    } else {
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Logify Logo",
+                modifier = Modifier.size(220.dp)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text = "Logify", style = PalDark48RegB)
+            Spacer(modifier = Modifier.height(32.dp))
+            CustomTextField(
+                value = phoneNumber,
+                onValueChange = { phoneNumber = it },
+                label = "Phone Number",
+                focusRequester = focusRequesterPhone,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(onNext = { focusRequesterPassword.requestFocus() })
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            CustomPasswordTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = "Password",
+                focusRequester = focusRequesterPassword,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() })
+            )
+            Spacer(modifier = Modifier.height(32.dp))
+            Button(
+                onClick = {
+                    try {
+                        val userResponse = viewModel.login(phoneNumber, password)
+                        if (userResponse != null) {
+                            viewModel.insertUser(userResponse)
+                        } else {
+                            scope.launch {
+                                snackbarHostState.showSnackbar("Something went wrong")
+                            }
+                        }
+                    } catch (e: Exception) {
                         scope.launch {
-                            snackbarHostState.showSnackbar("Something went wrong")
+                            snackbarHostState.showSnackbar("Error: ${e.message}")
                         }
                     }
-                } catch (e: Exception) {
-                    scope.launch {
-                        snackbarHostState.showSnackbar("Error: ${e.message}")
-                    }
-                }
-            },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp), contentPadding = PaddingValues(vertical = 0.dp)
-        ) {
-            Text(
-                text = "Log in",
-                fontSize = 20.sp,
-                style = TextStyle(
-                    fontFamily = FontFamily(
-                        Font(
-                            R.font.palanquin_medium,
-                            FontWeight.Medium
-                        )
-                    )
-                )
-            )
-        }
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp), contentPadding = PaddingValues(vertical = 0.dp)
+            ) {
+                Text(text = "Log in", style = Pal20Med)
+            }
         }
     }
 }

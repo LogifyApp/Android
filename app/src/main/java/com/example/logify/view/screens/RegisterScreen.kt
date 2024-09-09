@@ -54,6 +54,9 @@ import com.example.logify.dto.UserDto
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.DarkBlue
 import com.example.logify.ui.theme.LightBlue
+import com.example.logify.ui.theme.Pal18Med
+import com.example.logify.ui.theme.Pal20Med
+import com.example.logify.ui.theme.Pal24BoldB
 import com.example.logify.view.components.CustomPasswordTextField
 import com.example.logify.view.components.CustomTextField
 import com.example.logify.viewmodel.UserViewModel
@@ -78,160 +81,145 @@ fun RegisterScreen(navController: NavController, viewModel: UserViewModel = view
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
 
-    Image(
-        painter = painterResource(id = R.drawable.complex_background),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-        modifier = Modifier.fillMaxSize()
-    )
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
         Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Logify Logo",
-            modifier = Modifier.size(220.dp)
+            painter = painterResource(id = R.drawable.complex_background),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
         )
-        Text(
-            text = "Who are you?",
-            fontSize = 24.sp,
-            color = Color.Black,
-            textAlign = TextAlign.Center,
-            style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_bold, FontWeight.Bold)))
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 32.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .background(Color.Transparent),
-            horizontalArrangement = Arrangement.SpaceBetween
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Button(
-                onClick = { role = "Driver" },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (role == "Driver") DarkBlue else LightBlue,
-                    contentColor = if (role == "Driver") Color.White else Color.Black
-                ),
-                shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Logify Logo",
+                modifier = Modifier.size(220.dp)
+            )
+            Text(
+                text = "Who are you?", textAlign = TextAlign.Center, style = Pal24BoldB
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
                 modifier = Modifier
-                    .weight(1f)
-                    .graphicsLayer {
-                        alpha = if (role == "Employer") 0.75f else 1f
-                    },
-                border = if (role == "Driver") null else BorderStroke(5.dp, BackgroundLightBlue)
+                    .fillMaxWidth()
+                    .padding(horizontal = 32.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(Color.Transparent),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = "Driver", fontSize = 18.sp,
-                    style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium)))
-                )
+                Button(
+                    onClick = { role = "Driver" },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (role == "Driver") DarkBlue else LightBlue,
+                        contentColor = if (role == "Driver") Color.White else Color.Black
+                    ),
+                    shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .graphicsLayer {
+                            alpha = if (role == "Employer") 0.75f else 1f
+                        },
+                    border = if (role == "Driver") null else BorderStroke(5.dp, BackgroundLightBlue)
+                ) {
+                    Text(
+                        text = "Driver", style = Pal18Med
+                    )
+                }
+                Button(
+                    onClick = { role = "Employer" },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (role == "Employer") DarkBlue else LightBlue,
+                        contentColor = if (role == "Employer") Color.White else Color.Black
+                    ),
+                    shape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .graphicsLayer {
+                            alpha = if (role == "Driver") 0.75f else 1f
+                        },
+                    border = if (role == "Employer") null else BorderStroke(3.dp, BackgroundLightBlue)
+                ) {
+                    Text(
+                        text = "Employer", style = Pal18Med
+                    )
+                }
             }
+            Spacer(modifier = Modifier.height(38.dp))
+            CustomTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = "Name",
+                focusRequester = focusRequesterName,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(onNext = { focusRequesterSurname.requestFocus() })
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            CustomTextField(
+                value = surname,
+                onValueChange = { surname = it },
+                label = "Surname",
+                focusRequester = focusRequesterSurname,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(onNext = { focusRequesterPhone.requestFocus() })
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            CustomTextField(
+                value = phoneNumber,
+                onValueChange = { phoneNumber = it },
+                label = "Phone number",
+                focusRequester = focusRequesterPhone,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(onNext = { focusRequesterPassword.requestFocus() })
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            CustomPasswordTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = "Password",
+                focusRequester = focusRequesterPassword,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() })
+            )
+            Spacer(modifier = Modifier.height(32.dp))
             Button(
-                onClick = { role = "Employer" },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (role == "Employer") DarkBlue else LightBlue,
-                    contentColor = if (role == "Employer") Color.White else Color.Black
-                ),
-                shape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
-                modifier = Modifier
-                    .weight(1f)
-                    .graphicsLayer {
-                        alpha = if (role == "Driver") 0.75f else 1f
-                    },
-                border = if (role == "Employer") null else BorderStroke(3.dp, BackgroundLightBlue)
-            ) {
-                Text(
-                    text = "Employer", fontSize = 18.sp,
-                    style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium)))
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(38.dp))
-        CustomTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = "Name",
-            focusRequester = focusRequesterName,
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-            keyboardActions = KeyboardActions(onNext = { focusRequesterSurname.requestFocus() })
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        CustomTextField(
-            value = surname,
-            onValueChange = { surname = it },
-            label = "Surname",
-            focusRequester = focusRequesterSurname,
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-            keyboardActions = KeyboardActions(onNext = { focusRequesterPhone.requestFocus() })
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        CustomTextField(
-            value = phoneNumber,
-            onValueChange = { phoneNumber = it },
-            label = "Phone number",
-            focusRequester = focusRequesterPhone,
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-            keyboardActions = KeyboardActions(onNext = { focusRequesterPassword.requestFocus() })
-        )
-        Spacer(modifier = Modifier.height(12.dp))
-        CustomPasswordTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = "Password",
-            focusRequester = focusRequesterPassword,
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() })
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        Button(
-            onClick = {
-                val newUser = UserDto(
-                    phoneNumber = phoneNumber,
-                    name = name,
-                    surname = surname,
-                    password = password,
-                    role = role
-                )
-                try {
-                    val userResponse = viewModel.register(newUser)
-                    if (userResponse != null) {
-                        viewModel.insertUser(userResponse)
-                    } else {
+                onClick = {
+                    val newUser = UserDto(
+                        phoneNumber = phoneNumber,
+                        name = name,
+                        surname = surname,
+                        password = password,
+                        role = role
+                    )
+                    try {
+                        val userResponse = viewModel.register(newUser)
+                        if (userResponse != null) {
+                            viewModel.insertUser(userResponse)
+                        } else {
+                            scope.launch {
+                                snackbarHostState.showSnackbar("Something went wrong")
+                            }
+                        }
+                    } catch (e: Exception) {
                         scope.launch {
-                            snackbarHostState.showSnackbar("Something went wrong")
+                            snackbarHostState.showSnackbar("Error: ${e.message}")
                         }
                     }
-                } catch (e: Exception) {
-                    scope.launch {
-                        snackbarHostState.showSnackbar("Error: ${e.message}")
-                    }
-                }
-            },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp)
-        ) {
-            Text(
-                text = "Register",
-                fontSize = 20.sp,
-                style = TextStyle(
-                    fontFamily = FontFamily(
-                        Font(
-                            R.font.palanquin_medium,
-                            FontWeight.Medium
-                        )
-                    )
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp)
+            ) {
+                Text(
+                    text = "Register", style = Pal20Med
                 )
-            )
+            }
         }
-    }
     }
 }
 

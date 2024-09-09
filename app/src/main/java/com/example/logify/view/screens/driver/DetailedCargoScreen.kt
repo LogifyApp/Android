@@ -23,6 +23,9 @@ import com.example.logify.R
 import com.example.logify.enums.CargoStatusInfo
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Open26SemiW
+import com.example.logify.ui.theme.Pal14SemiW
+import com.example.logify.ui.theme.Pal24MedW
 import com.example.logify.view.components.DetailedCargoRow
 import com.example.logify.view.components.DriverBottomAppBarWithBadge
 import com.example.logify.viewmodel.CargoViewModel
@@ -54,21 +57,14 @@ fun DetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel
                     ) {
                         Spacer(modifier = Modifier.width(50.dp))
                         Text(
-                            "№${cargo?.id}",
-                            fontSize = 26.sp,
-                            style = TextStyle(
-                                fontFamily = FontFamily(Font(R.font.opensans_semibold)),
-                                color = Color.White
-                            )
+                            "№${cargo?.id}", style = Open26SemiW
                         )
                     }
                 },
                 actions = {
                     cargo?.let {
                         Text(
-                            text = it.status,
-                            color = Color.White,
-                            style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_semibold)), fontSize = 14.sp),
+                            text = it.status, style = Pal14SemiW,
                             modifier = Modifier
                                 .background(
                                     cargoStatusInfo.color,
@@ -104,12 +100,7 @@ fun DetailedCargoScreen(cargoId: Int, cargoViewModel: CargoViewModel = viewModel
                     colors = ButtonDefaults.buttonColors(containerColor = cargoStatusInfo.color)
                 ) {
                     Text(
-                        cargoStatusInfo.phrase,
-                        color = Color.White,
-                        style = TextStyle(
-                            fontFamily = FontFamily(Font(R.font.palanquin_medium)),
-                            fontSize = 24.sp
-                        )
+                        cargoStatusInfo.phrase, style = Pal24MedW
                     )
                     cargoStatusInfo.icon?.let {
                         Spacer(modifier = Modifier.width(4.dp))

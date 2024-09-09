@@ -24,6 +24,9 @@ import com.example.logify.data.Cargo
 import com.example.logify.enums.CargoStatusInfo
 import com.example.logify.ui.theme.BorderStatus
 import com.example.logify.ui.theme.CargoCardBackground
+import com.example.logify.ui.theme.Open14Semi
+import com.example.logify.ui.theme.Open18Semi
+import com.example.logify.ui.theme.Pal14SemiW
 
 @Composable
 fun CargoItemCard(cargo: Cargo) {
@@ -49,9 +52,7 @@ fun CargoItemCard(cargo: Cargo) {
             modifier = Modifier.weight(1f)
         ) {
             Text(
-                text = "№${cargo.id}",
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.opensans_semibold)),
-                fontSize = 18.sp)
+                text = "№${cargo.id}", style = Open18Semi
             )
         }
         Spacer(modifier = Modifier.width(16.dp))
@@ -63,15 +64,13 @@ fun CargoItemCard(cargo: Cargo) {
                     .background(cargoStatusInfo.color, shape = RoundedCornerShape(16.dp))
                     .padding(horizontal = 16.dp)
             ) {
-                Text(text = cargo.status, color = Color.White,
-                    style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_semibold))),
-                    fontSize = 14.sp)
+                Text(
+                    text = cargo.status, style = Pal14SemiW
+                )
             }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = cargo.creationDate,
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.opensans_semibold))),
-                fontSize = 14.sp
+                text = cargo.creationDate, style = Open14Semi
             )
         }
         Spacer(modifier = Modifier.width(8.dp))

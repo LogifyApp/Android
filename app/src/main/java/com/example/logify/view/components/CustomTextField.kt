@@ -24,6 +24,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.logify.R
+import com.example.logify.ui.theme.Open16Med
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,7 +46,7 @@ fun CustomTextField(
             .background(Color.White)
             .height(55.dp)
             .then(if (focusRequester != null) Modifier.focusRequester(focusRequester) else Modifier),
-        textStyle = TextStyle(fontSize = 16.sp, fontFamily = FontFamily(Font(R.font.opensans_medium)), fontWeight = FontWeight.Medium),
+        textStyle = Open16Med,
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Color.White,
             focusedIndicatorColor = Color.Transparent,

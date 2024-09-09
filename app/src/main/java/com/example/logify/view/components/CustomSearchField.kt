@@ -33,6 +33,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.logify.R
+import com.example.logify.ui.theme.Open14Med
+import com.example.logify.ui.theme.Open14Semi
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +48,7 @@ fun CustomSearchField(
     TextField(
         value = value,
         onValueChange = onValueChange,
-        placeholder = { Text(placeholder, style = TextStyle(fontSize = 14.sp)) },
+        placeholder = { Text(placeholder, style = Open14Med) },
         trailingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
@@ -60,11 +62,7 @@ fun CustomSearchField(
             .background(Color.White)
             .height(48.dp)
             .clipToBounds(),
-        textStyle = TextStyle(
-            fontSize = 14.sp,
-            fontFamily = FontFamily(Font(R.font.opensans_medium)),
-            fontWeight = FontWeight.Medium
-        ),
+        textStyle = Open14Med,
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Color.White,
             focusedIndicatorColor = Color.Transparent,

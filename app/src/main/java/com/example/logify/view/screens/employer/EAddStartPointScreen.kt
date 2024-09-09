@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Pal18MedW
+import com.example.logify.ui.theme.Pal24BoldB
 import com.example.logify.view.components.EmployerBottomAppBar
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
@@ -83,9 +85,7 @@ fun EAddStartPointScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Choose your start point",
-                fontSize = 20.sp,
-                color = Color.Black,
+                text = "Choose your start point", style = Pal24BoldB,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
@@ -150,7 +150,7 @@ fun EAddStartPointScreen() {
                     .fillMaxWidth()
                     .height(50.dp)
             ) {
-                Text(text = "Continue", color = Color.White, fontSize = 18.sp)
+                Text(text = "Continue", style = Pal18MedW)
             }
         }
     }

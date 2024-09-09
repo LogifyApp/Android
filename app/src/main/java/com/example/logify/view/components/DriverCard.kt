@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,14 +29,15 @@ import com.example.logify.enums.CargoStatusInfo
 import com.example.logify.ui.theme.BorderStatus
 import com.example.logify.ui.theme.CargoCardBackground
 import com.example.logify.ui.theme.GreenStatus
+import com.example.logify.ui.theme.Open18Semi
+import com.example.logify.ui.theme.Pal14SemiW
+import com.example.logify.ui.theme.Pal20Med
 
 
 @Composable
 fun DriverItemCardWithStatus(user: User) {
 //    val driverStatusInfo
     //TODO call a fun from back-end to check if driver has active cargos now
-    //TODO Fix style of text etc
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -56,11 +58,7 @@ fun DriverItemCardWithStatus(user: User) {
             modifier = Modifier.weight(1f)
         ) {
             Text(
-                text = user.name + " " + user.surname,
-                style = TextStyle(
-                    fontFamily = FontFamily(Font(R.font.opensans_semibold)),
-                    fontSize = 18.sp
-                )
+                text = user.name + " " + user.surname, style = Open18Semi
             )
         }
         Box(
@@ -68,9 +66,9 @@ fun DriverItemCardWithStatus(user: User) {
                 .background(GreenStatus, shape = RoundedCornerShape(16.dp))
                 .padding(horizontal = 16.dp)
         ) {
-            Text(text = "Ready", color = Color.White,
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_semibold))),
-                fontSize = 14.sp)
+            Text(
+                text = "Ready", style = Pal14SemiW
+            )
         }
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -104,28 +102,23 @@ fun DriverItemCard(user: User) {
             modifier = Modifier.weight(1f)
         ) {
             Text(
-                text = user.name + " " + user.surname,
-                style = TextStyle(
-                    fontFamily = FontFamily(Font(R.font.opensans_semibold)),
-                    fontSize = 18.sp
-                )
+                text = user.name + " " + user.surname, style = Open18Semi
             )
         }
 
         Spacer(modifier = Modifier.width(16.dp))
 
-        // Icon in white circle with black border for "Reject"
         Box(
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
                 .background(Color.White)
-                .border(1.dp, Color.Black, CircleShape), // Black border around the circle
+                .border(1.dp, Color.Black, CircleShape),
             contentAlignment = Alignment.Center
         ) {
             IconButton(onClick = { /* Handle reject click */ }) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_reject), // Replace with your reject icon resource
+                    painter = painterResource(id = R.drawable.ic_reject),
                     contentDescription = "Reject",
                     modifier = Modifier.size(24.dp)
                 )
@@ -134,18 +127,17 @@ fun DriverItemCard(user: User) {
 
         Spacer(modifier = Modifier.width(8.dp))
 
-        // Icon in white circle with black border for "Chat"
         Box(
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
                 .background(Color.White)
-                .border(1.dp, Color.Black, CircleShape), // Black border around the circle
+                .border(1.dp, Color.Black, CircleShape),
             contentAlignment = Alignment.Center
         ) {
             IconButton(onClick = { /* Handle chat click */ }) {
                 Image(
-                    painter = painterResource(id = R.drawable.chat), // Replace with your chat icon resource
+                    painter = painterResource(id = R.drawable.chat),
                     contentDescription = "Chat",
                     modifier = Modifier.size(24.dp)
                 )
@@ -159,7 +151,7 @@ fun DriverItemCard(user: User) {
 @Composable
 fun DriverList(driverItems: List<User>, withStatus: Boolean) {
     if (driverItems.isEmpty()){
-        Text(text = "You don’t have any employees yet")
+        Text(text = "You don’t have any employees yet", style = Pal20Med, textAlign = TextAlign.Center)
     }else {
         if (withStatus){
             LazyColumn {

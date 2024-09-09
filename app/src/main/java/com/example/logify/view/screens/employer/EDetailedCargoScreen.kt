@@ -65,12 +65,7 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            "№${cargo?.id}",
-                            fontSize = 26.sp,
-                            style = TextStyle(
-                                fontFamily = FontFamily(Font(R.font.opensans_semibold)),
-                                color = Color.White
-                            )
+                            "№${cargo?.id}", style = Open26SemiW
                         )
                     }
                 },
@@ -90,9 +85,7 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
                 actions = {
                     cargo?.let {
                         Text(
-                            text = it.status,
-                            color = Color.White,
-                            style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_semibold)), fontSize = 14.sp),
+                            text = it.status, style = Pal14SemiW,
                             modifier = Modifier
                                 .background(
                                     cargoStatusInfo.color,
@@ -130,16 +123,11 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
                     colors = ButtonDefaults.buttonColors(containerColor = AttachedStatus)
                 ) {
                     Text(
-                        "Attached documents",
-                        color = Color.White,
-                        style = TextStyle(
-                            fontFamily = FontFamily(Font(R.font.palanquin_medium)),
-                            fontSize = 24.sp
-                        )
+                        "Attached documents", style = Pal24MedW,
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Icon(
-                        painterResource(id = R.drawable.attach), // Attach icon
+                        painterResource(id = R.drawable.attach),
                         contentDescription = null,
                         tint = Color.White,
                         modifier = Modifier.size(28.dp)

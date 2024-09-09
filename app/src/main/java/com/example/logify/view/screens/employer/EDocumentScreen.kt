@@ -21,6 +21,8 @@ import com.example.logify.services.FileUtils.openDocument
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.GreenStatus
+import com.example.logify.ui.theme.Pal24MedW
+import com.example.logify.ui.theme.Pal24SemiW
 import com.example.logify.view.components.DocumentRow
 import com.example.logify.view.components.EmployerBottomAppBar
 import java.io.File
@@ -37,7 +39,7 @@ fun DocumentScreen() {
             TopAppBar(
                 title = {
                     Box(modifier = Modifier.fillMaxWidth().offset((-24).dp), contentAlignment = Alignment.Center) {
-                        Text(text = "Attached files", color = Color.White)
+                        Text(text = "Attached files", style = Pal24SemiW)
                     }
                 },
                 navigationIcon = {
@@ -92,7 +94,7 @@ fun DocumentScreen() {
                         .clip(RoundedCornerShape(20))
                         .background(GreenStatus),
                 ) {
-                    Text(text = "Approve", color = Color.White, fontSize = 18.sp)
+                    Text(text = "Approve", style = Pal24MedW)
                 }
             }
         }

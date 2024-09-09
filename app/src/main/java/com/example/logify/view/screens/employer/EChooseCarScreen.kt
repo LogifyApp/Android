@@ -38,6 +38,8 @@ import com.example.logify.data.Car
 import com.example.logify.data.User
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Pal24BoldB
+import com.example.logify.ui.theme.Pal24SemiW
 import com.example.logify.view.components.CarList
 import com.example.logify.view.components.EmployerBottomAppBar
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -74,7 +76,7 @@ fun EChooseCarScreen() {
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier.offset((-25).dp)
                                 ) {
-                                    Text(text = "Add new cargo", color = Color.White)
+                                    Text(text = "Add new cargo", style = Pal24SemiW)
                                 }
                             }
                         },
@@ -99,8 +101,7 @@ fun EChooseCarScreen() {
                         Box(modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp), contentAlignment = Alignment.Center){
-                            Text(text = "Choose car from the list", fontSize = 24.sp,
-                                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_bold))))
+                            Text(text = "Choose car from the list", style = Pal24BoldB)
                         }
                         HorizontalDivider(color = BlueBar, thickness = 1.dp)
                         Spacer(modifier = Modifier.height(16.dp))

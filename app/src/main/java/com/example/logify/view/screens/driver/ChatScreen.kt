@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import com.example.logify.data.Message
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Pal16Reg
+import com.example.logify.ui.theme.Pal24SemiW
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -125,7 +127,7 @@ fun ChatTopBar() {
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = "Employer's name", color = Color.White)
+                Text(text = "Employer's name", style = Pal24SemiW)
             }
         },
         navigationIcon = {
@@ -180,7 +182,7 @@ fun ChatMessageRow(message: Message) {
                 .background(backgroundColor, RoundedCornerShape(16.dp))
                 .padding(12.dp)
         ) {
-            Text(text = message.text, color = textColor)
+            Text(text = message.text, color = textColor, style = Pal16Reg)
         }
     }
 }

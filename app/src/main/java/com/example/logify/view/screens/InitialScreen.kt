@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.logify.R
+import com.example.logify.ui.theme.Pal20Med
+import com.example.logify.ui.theme.PalDark48RegB
 
 @Composable
 fun InitialScreen(navController: NavController) {
@@ -42,15 +44,7 @@ fun InitialScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
-            text = "Logify", fontSize = 48.sp, color = Color.Black,
-            style = TextStyle(
-                fontFamily = FontFamily(
-                    Font(
-                        R.font.palanquindark_regular,
-                        FontWeight.Normal
-                    )
-                )
-            )
+            text = "Logify", style = PalDark48RegB
         )
         Spacer(modifier = Modifier.height(100.dp))
         Button(
@@ -60,8 +54,7 @@ fun InitialScreen(navController: NavController) {
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
         ) {
             Text(
-                text = "Log in", fontSize = 20.sp,
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium)))
+                text = "Log in", style = Pal20Med
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -72,8 +65,7 @@ fun InitialScreen(navController: NavController) {
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
         ) {
             Text(
-                text = "Register", fontSize = 20.sp,
-                style = TextStyle(fontFamily = FontFamily(Font(R.font.palanquin_medium)))
+                text = "Register", style = Pal20Med
             )
         }
     }

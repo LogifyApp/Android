@@ -17,6 +17,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Open18Semi
+import com.example.logify.ui.theme.Pal18Med
+import com.example.logify.ui.theme.Pal18MedW
+import com.example.logify.ui.theme.Pal24BoldB
+import com.example.logify.ui.theme.Pal24SemiW
 import com.example.logify.view.components.EmployerBottomAppBar
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
@@ -61,7 +66,7 @@ fun EAddNextPointScreen() {
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.offset((-25).dp)
                         ) {
-                            Text(text = "Add new cargo", color = Color.White)
+                            Text(text = "Add new cargo", style = Pal24SemiW)
                         }
                     }
                 },
@@ -89,9 +94,7 @@ fun EAddNextPointScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Choose your next point",
-                fontSize = 20.sp,
-                color = Color.Black,
+                text = "Choose your next point", style = Pal24BoldB,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Divider(color = BlueBar, thickness = 1.dp, modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp))
@@ -183,7 +186,7 @@ fun EAddNextPointScreen() {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(bottom = 16.dp)
             ) {
-                Text(text = "Is it final point?", fontSize = 16.sp, color = Color.Black)
+                Text(text = "Is it final point?", style = Pal24BoldB)
                 Spacer(modifier = Modifier.width(8.dp))
                 Checkbox(
                     checked = isFinalPoint,
@@ -199,7 +202,7 @@ fun EAddNextPointScreen() {
                     .fillMaxWidth()
                     .height(50.dp)
             ) {
-                Text(text = "Continue", color = Color.White, fontSize = 18.sp)
+                Text(text = "Continue", style = Pal18MedW)
             }
         }
     }
