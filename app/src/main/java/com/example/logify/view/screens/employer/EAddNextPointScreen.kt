@@ -1,6 +1,6 @@
 package com.example.logify.view.screens.employer
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -11,14 +11,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.logify.ui.theme.BackgroundLightBlue
+import com.example.logify.R
 import com.example.logify.ui.theme.BlueBar
-import com.example.logify.ui.theme.Open18Semi
-import com.example.logify.ui.theme.Pal18Med
 import com.example.logify.ui.theme.Pal18MedW
 import com.example.logify.ui.theme.Pal24BoldB
 import com.example.logify.ui.theme.Pal24SemiW
@@ -38,8 +37,6 @@ fun EAddNextPointScreen() {
 
     //TODO Ensure that the required APIs (such as "Places API" and "Maps SDK for Android") are enabled for your project.
     //TODO Update marker position when the camera stops moving + Reverse geocode to update searchQuery if necessary
-
-    //TODO Fix TextStyles, colors etc.
 
     val context = LocalContext.current
     val placesClient = remember { Places.createClient(context) }
@@ -84,10 +81,15 @@ fun EAddNextPointScreen() {
             EmployerBottomAppBar(unreadMessageCount = 1)
         }
     ) { innerPadding ->
+        Image(
+            painter = painterResource(id = R.drawable.complex_background_cropped),
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
+        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BackgroundLightBlue)
                 .padding(innerPadding)
                 .verticalScroll(scrollState)
                 .padding(vertical = 16.dp),
@@ -97,7 +99,11 @@ fun EAddNextPointScreen() {
                 text = "Choose your next point", style = Pal24BoldB,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-            Divider(color = BlueBar, thickness = 1.dp, modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp))
+            Divider(
+                color = BlueBar,
+                thickness = 1.dp,
+                modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
+            )
 
             OutlinedTextField(
                 value = label,
@@ -165,7 +171,12 @@ fun EAddNextPointScreen() {
                     modifier = Modifier.fillMaxSize(),
                     cameraPositionState = cameraPositionState,
                     onMapLoaded = {
-                        cameraPositionState.move(CameraUpdateFactory.newLatLngZoom(markerPosition, 12f))
+                        cameraPositionState.move(
+                            CameraUpdateFactory.newLatLngZoom(
+                                markerPosition,
+                                12f
+                            )
+                        )
                     }
                 ) {
                     Marker(

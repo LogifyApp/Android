@@ -1,5 +1,6 @@
 package com.example.logify.view.screens.driver
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,7 +22,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.logify.R
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.view.components.CargoList
@@ -111,6 +115,12 @@ fun CargoScreen(cargoViewModel: CargoViewModel, employerId: Int, chatId: Int,
                         .background(BackgroundLightBlue)
                         .padding(innerPadding)
                 ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.complex_background_cropped),
+                        contentDescription = null,
+                        contentScale = ContentScale.FillBounds,
+                        modifier = Modifier.fillMaxSize()
+                    )
                     CargoList(cargoItems = filteredItems)
                 }
             }

@@ -1,5 +1,6 @@
 package com.example.logify.view.screens.employer
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,12 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.logify.R
 import com.example.logify.services.FileUtils.openDocument
-import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.GreenStatus
 import com.example.logify.ui.theme.Pal24MedW
@@ -56,10 +58,15 @@ fun DocumentScreen() {
             EmployerBottomAppBar(unreadMessageCount = 1)
         }
     ) { innerPadding ->
+        Image(
+            painter = painterResource(id = R.drawable.complex_background_cropped),
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
+        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BackgroundLightBlue)
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp, vertical = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -80,7 +87,6 @@ fun DocumentScreen() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(BackgroundLightBlue)
                     .weight(0.12f),
                 contentAlignment = Alignment.Center
             ) {
@@ -89,8 +95,7 @@ fun DocumentScreen() {
                     colors = ButtonDefaults.buttonColors(containerColor = GreenStatus),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight()
-                        .padding(20.dp)
+                        .padding(10.dp)
                         .clip(RoundedCornerShape(20))
                         .background(GreenStatus),
                 ) {

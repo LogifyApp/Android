@@ -1,5 +1,6 @@
 package com.example.logify.view.screens.employer
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +21,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.logify.R
@@ -37,9 +39,6 @@ import com.google.accompanist.insets.ProvideWindowInsets
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EDriversScreen() {
-
-    //TODO Fix design of text etc.
-
 //    val drivers by driverViewModel.drivers.observeAsState(emptyList())
     val drivers by remember { mutableStateOf(listOf<User>(User(1, "Name", "Surname", "+484832843824", "Driver"), User(1, "Name", "Surname", "+484832843824", "Driver"), User(1, "Name", "Surname", "+484832843824", "Driver"))) }
 
@@ -82,6 +81,12 @@ fun EDriversScreen() {
                         .background(BackgroundLightBlue)
                         .padding(innerPadding)
                 ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.complex_background_cropped),
+                        contentDescription = null,
+                        contentScale = ContentScale.FillBounds,
+                        modifier = Modifier.fillMaxSize()
+                    )
                     Column {
                         Spacer(modifier = Modifier.height(20.dp))
                         DriverList(driverItems = drivers, false)

@@ -16,7 +16,6 @@ import com.example.logify.R
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.DarkBlue
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmployerBottomAppBar(unreadMessageCount: Int) {
     BottomAppBar(

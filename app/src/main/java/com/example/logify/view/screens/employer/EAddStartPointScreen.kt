@@ -2,7 +2,7 @@ package com.example.logify.view.screens.employer
 
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -11,11 +11,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.logify.ui.theme.BackgroundLightBlue
+import com.example.logify.R
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.Pal18MedW
 import com.example.logify.ui.theme.Pal24BoldB
@@ -76,10 +77,15 @@ fun EAddStartPointScreen() {
             EmployerBottomAppBar(unreadMessageCount = 1)
         }
     ) { innerPadding ->
+        Image(
+            painter = painterResource(id = R.drawable.complex_background_cropped),
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
+        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BackgroundLightBlue)
                 .padding(innerPadding)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -123,7 +129,12 @@ fun EAddStartPointScreen() {
                     modifier = Modifier.fillMaxSize(),
                     cameraPositionState = cameraPositionState,
                     onMapLoaded = {
-                        cameraPositionState.move(CameraUpdateFactory.newLatLngZoom(markerPosition, 12f))
+                        cameraPositionState.move(
+                            CameraUpdateFactory.newLatLngZoom(
+                                markerPosition,
+                                12f
+                            )
+                        )
                     }
                 ) {
                     Marker(

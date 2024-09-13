@@ -2,6 +2,7 @@ package com.example.logify.view.screens.driver
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,12 +22,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.logify.R
 import com.example.logify.data.Message
-import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.Pal16Reg
 import com.example.logify.ui.theme.Pal24SemiW
@@ -107,9 +110,14 @@ fun ChatScreen() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BackgroundLightBlue)
                 .padding(innerPadding)
         ) {
+            Image(
+                painter = painterResource(id = R.drawable.complex_background_cropped),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.fillMaxSize()
+            )
             ChatMessages(messages, listState)
         }
     }

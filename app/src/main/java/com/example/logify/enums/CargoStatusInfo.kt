@@ -1,8 +1,6 @@
 package com.example.logify.enums
 
-import android.graphics.Color
 import com.example.logify.R
-import com.example.logify.data.Cargo
 import com.example.logify.ui.theme.GreenStatus
 import com.example.logify.ui.theme.LightBlueStatus
 import com.example.logify.ui.theme.LightGreenStatus

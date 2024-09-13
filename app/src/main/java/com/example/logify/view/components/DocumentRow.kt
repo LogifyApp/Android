@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.example.logify.R
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.Open20Reg
-import com.example.logify.ui.theme.Open20Semi
 import java.io.File
 
 @Composable

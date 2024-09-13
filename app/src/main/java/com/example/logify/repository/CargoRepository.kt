@@ -1,10 +1,8 @@
 package com.example.logify.repository
 
 import com.example.logify.dao.CargoDao
-import com.example.logify.dao.UserDao
 import com.example.logify.data.Cargo
 import com.example.logify.services.CargoService
-import com.example.logify.services.UserService
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -12,7 +12,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.logify.data.Cargo
 import com.example.logify.data.User
 import com.example.logify.ui.theme.LogifyTheme
 import com.example.logify.view.screens.driver.CargoScreen
@@ -58,7 +57,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AppContent(navController: NavHostController, userViewModel: UserViewModel, cargoViewModel: CargoViewModel) {
-        NavHost(navController = navController, startDestination = "addNextPoint") {
+        NavHost(navController = navController, startDestination = "empDetCargo") {
             composable("initial") { InitialScreen(navController) }
             composable("login") { LoginScreen(navController, userViewModel) }
             composable("register") { RegisterScreen(navController, userViewModel) }

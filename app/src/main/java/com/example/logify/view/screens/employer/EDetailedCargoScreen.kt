@@ -1,5 +1,6 @@
 package com.example.logify.view.screens.employer
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,19 +14,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.logify.R
 import com.example.logify.data.Cargo
 import com.example.logify.enums.CargoStatusInfo
 import com.example.logify.ui.theme.*
 import com.example.logify.view.components.DetailedCargoRow
-import com.example.logify.view.components.DriverBottomAppBarWithBadge
 import com.example.logify.view.components.EmployerBottomAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -105,10 +102,15 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
             EmployerBottomAppBar(unreadMessageCount = 1)
         }
     ) { innerPadding ->
+        Image(
+            painter = painterResource(id = R.drawable.complex_background_cropped),
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
+        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BackgroundLightBlue)
                 .padding(innerPadding)
         ) {
             cargo?.let { cargo ->
@@ -139,7 +141,6 @@ fun EDetailedCargoScreen(cargoId: Int, chatId: Int) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(BackgroundLightBlue)
                 ) {
                     item {
                         DetailedCargoRow(label = "Creation date", value = cargo.creationDate)

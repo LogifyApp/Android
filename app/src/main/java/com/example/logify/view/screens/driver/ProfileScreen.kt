@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -41,11 +42,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.example.logify.R
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.Pal15Med
-import com.example.logify.ui.theme.Pal18Med
 import com.example.logify.ui.theme.Pal20Bold
 import com.example.logify.ui.theme.Pal20Med
 import com.example.logify.ui.theme.Pal20MedW
@@ -84,6 +85,7 @@ fun ProfileScreen() {
                 modifier = Modifier
                     .height(140.dp)
                     .align(Alignment.TopCenter)
+                    .zIndex(1f)
             )
             Box(
                 modifier = Modifier
@@ -91,7 +93,8 @@ fun ProfileScreen() {
                     .align(Alignment.TopCenter)
                     .offset(y = 65.dp)
                     .clip(CircleShape)
-                    .background(White),
+                    .background(White)
+                    .zIndex(1f),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -101,6 +104,12 @@ fun ProfileScreen() {
                 )
             }
 
+            Image(
+                painter = painterResource(id = R.drawable.complex_background_cropped),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.fillMaxSize()
+            )
             Column(
                 modifier = Modifier
                     .fillMaxSize()

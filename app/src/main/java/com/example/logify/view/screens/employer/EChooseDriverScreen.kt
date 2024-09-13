@@ -1,5 +1,6 @@
 package com.example.logify.view.screens.employer
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,12 +28,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.logify.R
 import com.example.logify.data.User
 import com.example.logify.ui.theme.BackgroundLightBlue
@@ -92,6 +91,12 @@ fun EChooseDriverScreen() {
                         .background(BackgroundLightBlue)
                         .padding(innerPadding)
                 ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.complex_background_cropped),
+                        contentDescription = null,
+                        contentScale = ContentScale.FillBounds,
+                        modifier = Modifier.fillMaxSize()
+                    )
                     Column {
                         Box(modifier = Modifier
                             .fillMaxWidth()

@@ -3,7 +3,6 @@ package com.example.logify.view.screens.driver
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,16 +20,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.logify.R
 import com.example.logify.services.FileUtils.openDocument
 import com.example.logify.services.FileUtils.uriToFile
-import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.GreenStatus
 import com.example.logify.ui.theme.Open18Semi
 import com.example.logify.ui.theme.Open26SemiW
-import com.example.logify.ui.theme.Pal24MedW
 import com.example.logify.view.components.DocumentRow
 import com.example.logify.view.components.DriverBottomAppBarWithBadge
 import java.io.File
@@ -76,10 +72,16 @@ fun DocumentScreen() {
             )
         }
     ) { innerPadding ->
+        Image(
+            painter = painterResource(id = R.drawable.complex_background_cropped),
+            contentDescription = null,
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier.fillMaxSize()
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(BackgroundLightBlue)
                 .padding(innerPadding)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
