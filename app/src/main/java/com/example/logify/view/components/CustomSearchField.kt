@@ -46,7 +46,7 @@ fun CustomSearchField(
         },
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(19.dp))
+            .clip(RoundedCornerShape(25.dp))
             .background(Color.White)
             .height(48.dp)
             .clipToBounds(),
