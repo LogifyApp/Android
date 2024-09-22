@@ -1,7 +1,10 @@
 package com.example.logify.view.screens.employer
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
@@ -10,20 +13,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.logify.R
 import com.example.logify.ui.theme.BlueBar
 import com.example.logify.ui.theme.Pal24SemiW
-import com.example.logify.view.components.CustomSearchField
+import com.example.logify.view.components.CustomTextField
 import com.example.logify.view.components.EmployerBottomAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EAddNewDriverScreen() {
+fun EAddNewDriverScreen(navController: NavController) {
 
     var phoneNumber by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Scaffold(
         topBar = {
@@ -71,10 +81,23 @@ fun EAddNewDriverScreen() {
                 Spacer(modifier = Modifier.height(45.dp))
 
                 Box(modifier = Modifier.padding(horizontal = 25.dp)){
-                    CustomSearchField(
+                    CustomTextField(
                         value = phoneNumber,
                         onValueChange = { phoneNumber = it },
-                        placeholder = "Enter phone number"
+                        label = "Enter phone number",
+                        keyboardActions = KeyboardActions(
+                            onSearch = {
+                                keyboardController?.hide()
+                                if (phoneNumberExists(phoneNumber)) {
+                                    navController.navigate("driver_details/$phoneNumber")
+                                } else {
+                                    Toast.makeText(context, "Phone number not found", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        ),
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            imeAction = ImeAction.Search
+                        )
                     )
                 }
 
@@ -92,9 +115,15 @@ fun EAddNewDriverScreen() {
     }
 }
 
+fun phoneNumberExists(phoneNumber: String): Boolean {
+    // Here, you would check if the phone number exists in your database
+    //TODO refactor and add to ViewModel structure
+    return phoneNumber == "+4845393994"
+}
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewEAddNewDriverScreen() {
-    EAddNewDriverScreen()
+    val navController = rememberNavController()
+    EAddNewDriverScreen(navController)
 }

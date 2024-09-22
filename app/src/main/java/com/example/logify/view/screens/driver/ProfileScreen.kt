@@ -78,12 +78,12 @@ fun ProfileScreen() {
                         text = "Profile", style = Pal20MedW,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 25.dp, end = 16.dp),
+                            .padding(end = 16.dp)
+                            .offset(y = (-5).dp),
                         textAlign = TextAlign.Center
                     )
                 },
                 modifier = Modifier
-                    .height(140.dp)
                     .align(Alignment.TopCenter)
                     .zIndex(1f)
             )
@@ -91,7 +91,7 @@ fun ProfileScreen() {
                 modifier = Modifier
                     .size(120.dp)
                     .align(Alignment.TopCenter)
-                    .offset(y = 65.dp)
+                    .offset(y = 45.dp)
                     .clip(CircleShape)
                     .background(White)
                     .zIndex(1f),
