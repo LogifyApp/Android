@@ -1,4 +1,4 @@
-package com.example.logify.view.screens.driver
+package com.example.logify.view.screens
 
 import android.content.Intent
 import android.net.Uri
@@ -135,7 +135,7 @@ fun ChatTopBar() {
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = "Employer's name", style = Pal24SemiW)
+                Text(text = "Name", style = Pal24SemiW)
             }
         },
         navigationIcon = {

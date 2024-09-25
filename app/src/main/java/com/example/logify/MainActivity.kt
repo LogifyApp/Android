@@ -19,7 +19,7 @@ import com.example.logify.view.screens.InitialScreen
 import com.example.logify.view.screens.LoginScreen
 import com.example.logify.view.screens.MapScreen
 import com.example.logify.view.screens.RegisterScreen
-import com.example.logify.view.screens.driver.ChatScreen
+import com.example.logify.view.screens.ChatScreen
 import com.example.logify.view.screens.driver.DetailedCargoScreen
 import com.example.logify.view.screens.employer.EAddNextPointScreen
 import com.example.logify.view.screens.employer.EAddStartPointScreen
