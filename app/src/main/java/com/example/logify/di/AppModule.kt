@@ -6,6 +6,7 @@ import com.example.logify.dao.AppDatabase
 import com.example.logify.dao.CargoDao
 import com.example.logify.dao.ChatLastOpenedDao
 import com.example.logify.dao.DocumentDao
+import com.example.logify.dao.PointDao
 import com.example.logify.dao.TokenDao
 import com.example.logify.dao.UserDao
 import com.example.logify.repository.CargoRepository
@@ -108,6 +109,12 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun providePointDao(database: AppDatabase): PointDao {
+        return database.pointDao()
+    }
+
+    @Provides
+    @Singleton
     fun provideUserRepository(userService: UserService, userDao: UserDao): UserRepository {
         return UserRepository(userService, userDao)
     }
@@ -120,8 +127,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCargoRepository(cargoService: CargoService, cargoDao: CargoDao): CargoRepository {
-        return CargoRepository(cargoService, cargoDao)
+    fun provideCargoRepository(cargoService: CargoService, cargoDao: CargoDao, pointDao: PointDao): CargoRepository {
+        return CargoRepository(cargoService, cargoDao, pointDao)
     }
 
     @Provides

@@ -51,6 +51,14 @@ val Pal18Med = TextStyle(
     fontSize = 18.sp
 )
 
+val Pal20RegG = TextStyle(
+    fontFamily = FontFamily(
+        Font(R.font.palanquin_regular, FontWeight.Normal)
+    ),
+    color = Color.Gray,
+    fontSize = 20.sp
+)
+
 val Pal18MedW = TextStyle(
     fontFamily = FontFamily(
         Font(R.font.palanquin_medium, FontWeight.Medium)

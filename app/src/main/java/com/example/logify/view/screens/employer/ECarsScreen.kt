@@ -2,6 +2,7 @@ package com.example.logify.view.screens.employer
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,15 +22,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.logify.R
+import com.example.logify.data.Car
 import com.example.logify.data.User
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
+import com.example.logify.ui.theme.Pal12Reg
+import com.example.logify.ui.theme.Pal16Reg
+import com.example.logify.ui.theme.Pal20RegG
 import com.example.logify.ui.theme.Pal24SemiW
+import com.example.logify.view.components.AddCarList
 import com.example.logify.view.components.AddFloatingButton
 import com.example.logify.view.components.DriverList
 import com.example.logify.view.components.EmployerBottomAppBar
@@ -38,9 +46,12 @@ import com.google.accompanist.insets.ProvideWindowInsets
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EDriversScreen() {
-//    val drivers by driverViewModel.drivers.observeAsState(emptyList())
-    val drivers by remember { mutableStateOf(listOf(User(1, "Name", "Surname", "+484832843824", "Driver"), User(1, "Name", "Surname", "+484832843824", "Driver"), User(1, "Name", "Surname", "+484832843824", "Driver"))) }
+fun ECarsScreen() {
+    val cars by remember { mutableStateOf(listOf(Car(number = "ABC123", model = "Model S", brand = "Tesla", status = true, employerId = 1),
+        Car(number = "XYZ987", model = "Civic", brand = "Honda", status = false, employerId = 2),
+        Car(number = "LMN456", model = "Mustang", brand = "Ford", status = true, employerId = 3)))
+    }
+//    val cars by remember { mutableStateOf(listOf<Car>()) }
 
     ProvideWindowInsets {
         Box(
@@ -62,14 +73,14 @@ fun EDriversScreen() {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                 ) {
-                                    Text(text = "Drivers", style = Pal24SemiW)
+                                    Text(text = "Cars ", style = Pal24SemiW)
                                 }
                             }
                         }
                     )
                 },
                 floatingActionButton = {
-                    AddFloatingButton(imageVector = null, idOfDrawable = R.drawable.add_user) // Adding the button to the screen
+                    AddFloatingButton(imageVector = null, idOfDrawable = R.drawable.addcar)
                 },
                 bottomBar = {
                     EmployerBottomAppBar(unreadMessageCount = 1)
@@ -87,9 +98,21 @@ fun EDriversScreen() {
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier.fillMaxSize()
                     )
-                    Column {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    )  {
                         Spacer(modifier = Modifier.height(20.dp))
-                        DriverList(driverItems = drivers, false)
+
+                        if (cars.isEmpty()) {
+                            Text(
+                                text = "You don’t have any cars yet",
+                                style = Pal20RegG,
+                                modifier = Modifier.padding(top = 20.dp)
+                            )
+                        } else {
+                            AddCarList(cars)
+                        }
                     }
                 }
             }
@@ -99,6 +122,6 @@ fun EDriversScreen() {
 
 @Preview
 @Composable
-fun PreviewDrivers(){
-    EDriversScreen()
+fun PreviewCar(){
+    ECarsScreen()
 }
