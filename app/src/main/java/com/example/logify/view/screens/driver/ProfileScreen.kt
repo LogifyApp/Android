@@ -91,7 +91,7 @@ fun ProfileScreen() {
                 modifier = Modifier
                     .size(120.dp)
                     .align(Alignment.TopCenter)
-                    .offset(y = 45.dp)
+                    .offset(y = 70.dp)
                     .clip(CircleShape)
                     .background(White)
                     .zIndex(1f),
