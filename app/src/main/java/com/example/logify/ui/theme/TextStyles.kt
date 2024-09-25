@@ -105,6 +105,14 @@ val Pal24SemiW = TextStyle(
     fontSize = 24.sp
 )
 
+val Pal24SemiG = TextStyle(
+    fontFamily = FontFamily(
+        Font(R.font.palanquin_semibold, FontWeight.SemiBold)
+    ),
+    color = Color.Gray,
+    fontSize = 24.sp
+)
+
 val Pal24MedW = TextStyle(
     fontFamily = FontFamily(
         Font(R.font.palanquin_medium, FontWeight.Medium)
