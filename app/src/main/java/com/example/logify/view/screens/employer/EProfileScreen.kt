@@ -23,19 +23,15 @@ import androidx.compose.ui.zIndex
 import com.example.logify.R
 import com.example.logify.ui.theme.BackgroundLightBlue
 import com.example.logify.ui.theme.BlueBar
-import com.example.logify.ui.theme.Pal20Bold
 import com.example.logify.ui.theme.Pal20Med
 import com.example.logify.ui.theme.Pal20MedW
 import com.example.logify.ui.theme.Pal24BoldB
 import com.example.logify.ui.theme.Pal32Bold
-import com.example.logify.view.components.DriverBottomAppBarWithBadge
 import com.example.logify.view.components.EmployerBottomAppBar
 import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.CameraPosition
-import com.google.maps.android.compose.rememberMarkerState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -119,7 +115,7 @@ fun EProfileScreen() {
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    Divider(color = BlueBar, thickness = 1.dp)
+                    HorizontalDivider(color = BlueBar, thickness = 1.dp)
 
                     Text(text = "My Cars", style = Pal32Bold,
                         textDecoration = TextDecoration.Underline,
@@ -127,7 +123,7 @@ fun EProfileScreen() {
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    Divider(color = BlueBar, thickness = 1.dp)
+                    HorizontalDivider(color = BlueBar, thickness = 1.dp)
 
                     ProfileSection(title = "My map") {
                         Box(
@@ -146,7 +142,7 @@ fun EProfileScreen() {
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Divider(color = BlueBar, thickness = 1.dp)
+                    HorizontalDivider(color = BlueBar, thickness = 1.dp)
 
                     ProfileSection(title = "Language") {
                         Row(

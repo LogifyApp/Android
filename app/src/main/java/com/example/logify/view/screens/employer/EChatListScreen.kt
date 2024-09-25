@@ -74,7 +74,7 @@ fun EChatListScreen(chatList: List<Chat>) {
             ) {
                 items(chatList) { chat ->
                     ChatListItem(chat)
-                    Divider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 8.dp))
+                    HorizontalDivider(color = Color.LightGray, thickness = 1.dp, modifier = Modifier.padding(vertical = 8.dp))
                 }
             }
         }
