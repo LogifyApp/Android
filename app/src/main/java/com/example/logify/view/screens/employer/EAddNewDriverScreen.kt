@@ -64,7 +64,6 @@ fun EAddNewDriverScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // Background image
             Image(
                 painter = painterResource(id = R.drawable.complex_background_cropped),
                 contentDescription = null,

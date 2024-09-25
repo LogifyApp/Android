@@ -22,6 +22,7 @@ import com.example.logify.view.screens.RegisterScreen
 import com.example.logify.view.screens.ChatScreen
 import com.example.logify.view.screens.driver.DetailedCargoScreen
 import com.example.logify.view.screens.driver.ProfileScreen
+import com.example.logify.view.screens.employer.EAddEditCarScreen
 import com.example.logify.view.screens.employer.EAddNextPointScreen
 import com.example.logify.view.screens.employer.EAddStartPointScreen
 import com.example.logify.view.screens.employer.ECargoScreen
@@ -59,7 +60,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AppContent(navController: NavHostController, userViewModel: UserViewModel, cargoViewModel: CargoViewModel) {
-        NavHost(navController = navController, startDestination = "profileScreen") {
+        NavHost(navController = navController, startDestination = "addEditCarScreen") {
             composable("initial") { InitialScreen(navController) }
             composable("login") { LoginScreen(navController, userViewModel) }
             composable("register") { RegisterScreen(navController, userViewModel) }
@@ -78,6 +79,7 @@ class MainActivity : ComponentActivity() {
             composable("addNextPoint") { EAddNextPointScreen() }
             composable("eProfileScreen") { EProfileScreen() }
             composable("profileScreen") { ProfileScreen() }
+            composable("addEditCarScreen") { EAddEditCarScreen(currentUserId = 1, onSave = {}) }
         }
     }
 }

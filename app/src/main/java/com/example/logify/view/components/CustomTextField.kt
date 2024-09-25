@@ -25,27 +25,31 @@ fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
+    isError: Boolean = false,
     focusRequester: FocusRequester? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default
 ) {
+    val borderColor = if (isError) Color.Red else Color.Transparent
+
     TextField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(label) },
         modifier = Modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(19.dp))
+            .clip(RoundedCornerShape(24.dp))
             .background(Color.White)
             .height(55.dp)
             .then(if (focusRequester != null) Modifier.focusRequester(focusRequester) else Modifier),
         textStyle = Open16Med,
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Color.White,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = borderColor,
+            unfocusedIndicatorColor = borderColor
         ),
         keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions
+        keyboardActions = keyboardActions,
+        isError = isError
     )
 }

@@ -70,11 +70,7 @@ fun ECarsScreen() {
                                 modifier = Modifier.fillMaxWidth(),
                                 contentAlignment = Alignment.Center
                             ) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                ) {
-                                    Text(text = "Cars ", style = Pal24SemiW)
-                                }
+                                Text(text = "Cars ", style = Pal24SemiW)
                             }
                         }
                     )

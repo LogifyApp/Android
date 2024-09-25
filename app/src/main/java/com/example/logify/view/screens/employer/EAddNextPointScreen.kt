@@ -99,7 +99,7 @@ fun EAddNextPointScreen() {
                 text = "Choose your next point", style = Pal24BoldB,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-            Divider(
+            HorizontalDivider(
                 color = BlueBar,
                 thickness = 1.dp,
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)
@@ -120,7 +120,7 @@ fun EAddNextPointScreen() {
                 )
             )
 
-            Divider(color = BlueBar, thickness = 1.dp)
+            HorizontalDivider(color = BlueBar, thickness = 1.dp)
 
             OutlinedTextField(
                 value = description,
@@ -137,7 +137,7 @@ fun EAddNextPointScreen() {
                 maxLines = 3
             )
 
-            Divider(color = BlueBar, thickness = 1.dp)
+            HorizontalDivider(color = BlueBar, thickness = 1.dp)
 
             OutlinedTextField(
                 value = nextPoint,
@@ -159,7 +159,7 @@ fun EAddNextPointScreen() {
                 )
             )
 
-            Divider(color = BlueBar, thickness = 1.dp)
+            HorizontalDivider(color = BlueBar, thickness = 1.dp)
 
             Box(
                 modifier = Modifier
@@ -191,7 +191,7 @@ fun EAddNextPointScreen() {
                 }
             }
 
-            Divider(color = BlueBar, thickness = 1.dp)
+            HorizontalDivider(color = BlueBar, thickness = 1.dp)
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -205,7 +205,6 @@ fun EAddNextPointScreen() {
                 )
             }
 
-            // Continue Button
             Button(
                 onClick = { /* Handle continue action */ },
                 colors = ButtonDefaults.buttonColors(containerColor = BlueBar),
