@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.logify.data.Cargo
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CargoDao {
@@ -23,4 +24,7 @@ interface CargoDao {
 
     @Query("UPDATE cargos SET description = :description WHERE id = :id")
     suspend fun updateDescriptionOfCargo(id: Int, description: String)
+
+    @Query("SELECT * FROM cargos WHERE id = :id")
+    fun getCargoById(id: Int): Flow<Cargo>
 }

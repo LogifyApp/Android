@@ -117,13 +117,40 @@ fun RouteMap(modifier: Modifier = Modifier) {
             width = 5f
         )
     }
+    //TODO modify the MapScreen to support multiple cargos by passing a list of Cargo and Point objects.
+//fun MapScreen(cargos: List<Cargo>, points: Map<Int, List<Point>>, modifier: Modifier = Modifier) {
+//    val initialPosition = LatLng(points.values.first().first().latitude, points.values.first().first().longitude)
+//    val cameraPositionState = rememberCameraPositionState {
+//        position = CameraPosition.fromLatLngZoom(initialPosition, 12f)
+//    }
+//
+//    GoogleMap(
+//        modifier = modifier.fillMaxSize(),
+//        cameraPositionState = cameraPositionState
+//    ) {
+//        cargos.forEach { cargo ->
+//            val cargoPoints = points[cargo.id] ?: emptyList()
+//
+//            // Plot the points for the cargo
+//            cargoPoints.forEach { point ->
+//                Marker(
+//                    state = MarkerState(position = LatLng(point.latitude, point.longitude)),
+//                    title = point.label
+//                )
+//            }
+//
+//            // Draw polyline for cargo route
+//            Polyline(
+//                points = cargoPoints.map { LatLng(it.latitude, it.longitude) },
+//                color = Color.Blue,
+//                width = 5f
+//            )
+//        }
+//    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun RouteScreenContentPreview() {
     MapScreen(User(1, "Name", "Surname", "+484832843824", "Driver"))
-    //TODO Fix problem with preview (Manifest <meta-data
-    //            android:name="com.google.android.gms.version"
-    //            android:value="@integer/google_play_services_version" />)
 }
